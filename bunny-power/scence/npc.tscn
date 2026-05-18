@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ci2b1er2oq42v"]
+
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://scence/npc.gd" id="1_fkmfs"]
+[ext_resource type="Texture2D" uid="uid://4cmqhsoiesqm" path="res://sprite/steav bunny.png" id="2_d4c0g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
+atlas = ExtResource("2_d4c0g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
+atlas = ExtResource("2_d4c0g")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7lw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxcha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh24r")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ul7y6"]
+radius = 38.052597
+
+[node name="npc" type="CharacterBody2D" unique_id=1509032494]
+script = ExtResource("1_fkmfs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2099000930]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_v7lw1")
+animation = &"IDLE"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1631703447]
+position = Vector2(3.5000021, 0.8676448)
+scale = Vector2(2.34375, 1.9117645)
+polygon = PackedVector2Array(0, -10, -6, 0, 0, 7, 6, 0)
+
+[node name="chat_detection_area" type="Area2D" parent="." unique_id=2089773932]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_detection_area" unique_id=735662]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_ul7y6")
+
+[node name="Timer" type="Timer" parent="." unique_id=1145345278]
+autostart = true
+
+[connection signal="body_entered" from="chat_detection_area" to="." method="_on_chat_detection_area_body_entered"]
+[connection signal="body_exited" from="chat_detection_area" to="." method="_on_chat_detection_area_body_exited"]
