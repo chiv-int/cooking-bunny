@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="bunnyPower"
-run/main_scene="uid://bl1ckswqw0dbq"
+run/main_scene="uid://dx5n81tubq32r"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=400
+window/size/viewport_height=500
 window/size/no_focus=true
 window/size/window_width_override=1280
 window/size/window_height_override=720

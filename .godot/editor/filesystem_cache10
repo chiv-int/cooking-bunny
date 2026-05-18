@@ -1,0 +1,11 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1779081056
+game_manager.gd::GDScript::6111196244668038439::1779040480::0::1::::<>Node<><>0<>0<><>::
+icon.svg::CompressedTexture2D::443555239170579285::1778430040::1778430048::1::::<><><>0<>0<>b1237900d053e6e77bb85f23e7855b51<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+README.md::TextFile::-1::1779041520::0::1::::<><><>0<>0<><>::
+world.tscn::PackedScene::8836386435349761511::1779040726::0::1::::<><><>0<>0<><>::uid://c01ek74ba7cfm::::res://world/player.png<>uid://ctckrk0ihpmrn::::res://game_manager.gd
+::res://Player/::1778430411
+::res://sprite/::1778430332
+::res://tile/::1778430346
+::res://world/::1778430480
+player.png::CompressedTexture2D::6581498731445909022::1778429603::1778430480::1::::<><><>0<>0<>8de173e53fe02a02df0d549d13c381fd<>res://.godot/imported/player.png-993a54d21997a250692b2aca115a7cbb.ctex::
