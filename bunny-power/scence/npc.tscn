@@ -26,7 +26,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ul7y6"]
-radius = 38.052597
+radius = 51.088158
 
 [node name="npc" type="CharacterBody2D" unique_id=1509032494]
 script = ExtResource("1_fkmfs")
