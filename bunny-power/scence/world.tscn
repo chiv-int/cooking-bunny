@@ -1516,4 +1516,4 @@ z_index = 1
 position = Vector2(35, 23)
 
 [node name="npc" parent="." unique_id=1509032494 instance=ExtResource("5_6psia")]
-position = Vector2(403, 171)
+position = Vector2(735, 334)
