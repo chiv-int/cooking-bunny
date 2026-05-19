@@ -12,12 +12,13 @@ config_version=5
 
 config/name="bunnyPower"
 run/main_scene="uid://dx5n81tubq32r"
+config/disable_project_settings_override=true
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bw2h3ctu671wa"
 
 [display]
 
-window/size/viewport_width=400
+window/size/viewport_width=1000
 window/size/viewport_height=500
 window/size/no_focus=true
 window/size/window_width_override=1280

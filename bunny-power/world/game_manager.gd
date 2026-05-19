@@ -3,6 +3,17 @@ extends Node
 var quality_score = 0
 var stars = 1
 
+@onready var salt_sprite = $"../PotArea/SaltSprite"
+@onready var garlic_sprite = $"../PotArea/GarlicSprite"
+@onready var potato_sprite = $"../PotArea/PotatoSprite"
+@onready var carrot_sprite = $"../PotArea/CarrotSprite"
+@onready var sugar_sprite = $"../PotArea/SugarSprite"
+@onready var coconut_sprite = $"../PotArea/CoconutSprite"
+@onready var curry_sprite = $"../PotArea/CurryPasteSprite"
+@onready var onion_sprite = $"../PotArea/OnionSprite"
+
+@onready var player_anim = $"../Player/AnimatedSprite2D"
+
 
 # Ingredient quantities
 var ingredients = {
@@ -82,30 +93,48 @@ func add_ingredient(ingredient_name: String):
 # BUTTON FUNCTIONS
 func _on_salt_button_pressed():
 	add_ingredient("salt")
+	salt_sprite.visible = true
+
+	player_anim.play("cook")
 
 
 func _on_sugar_button_pressed():
 	add_ingredient("sugar")
+	sugar_sprite.visible = true
+
+	player_anim.play("cook")
 
 
 func _on_curry_paste_button_pressed():
 	add_ingredient("curry_paste")
+	curry_sprite.visible = true
+
+	player_anim.play("cook")
 
 
-func _on_coconut_milk_button_pressed():
+func _on_coconut_button_pressed():
 	add_ingredient("coconut_milk")
 
 
 func _on_carrot_button_pressed():
 	add_ingredient("carrot")
+	carrot_sprite.visible = true
+
+	player_anim.play("cook")
 
 
 func _on_garlic_button_pressed():
 	add_ingredient("garlic")
+	garlic_sprite.visible = true
+
+	player_anim.play("cook")
 
 
 func _on_onion_button_pressed():
 	add_ingredient("onion")
+	onion_sprite.visible = true
+
+	player_anim.play("cook")
 
 
 # SERVE CURRY
