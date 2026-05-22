@@ -105,8 +105,11 @@ func _on_curry_paste_button_pressed():
 	player_anim.play("cook")
 
 
-func _on_coconut_button_pressed():
+func _on_coconut_milk_button_pressed():
 	add_ingredient("coconut_milk")
+	coconut_sprite.visible = true
+	
+	player_anim.play("cook")
 
 
 func _on_carrot_button_pressed():
