@@ -57,18 +57,11 @@ func _ready():
 	update_ui()
 
 
-# RANDOM REQUESTS
+# ALL INGREDIENTS AS REQUESTS
 func generate_requests():
-
 	villager_requests.clear()
-
-	while villager_requests.size() < 3:
-
-		var random_ingredient = possible_requests.pick_random()
-
-		if random_ingredient not in villager_requests:
-
-			villager_requests.append(random_ingredient)
+	for ingredient in possible_requests:
+		villager_requests.append(ingredient)
 
 
 # SHOW REQUESTS ON SCREEN

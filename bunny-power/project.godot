@@ -14,7 +14,7 @@ config/name="bunnyPower"
 run/main_scene="uid://dx5n81tubq32r"
 config/disable_project_settings_override=true
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://bw2h3ctu671wa"
+config/icon="uid://lygo50i1j6js"
 
 [display]
 
