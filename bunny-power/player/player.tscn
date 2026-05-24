@@ -229,7 +229,7 @@ advance_mode = 2
 advance_expression = "input_vector.length() == 0.0"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yllr7"]
-states/End/position = Vector2(900, 100.510284)
+states/End/position = Vector2(900.6667, 100.43224)
 states/RunState/node = SubResource("AnimationNodeBlendSpace2D_g6k8r")
 states/RunState/position = Vector2(500.36035, 192)
 states/StandState/node = SubResource("AnimationNodeBlendSpace2D_2ieo8")
@@ -248,7 +248,7 @@ states/MoveState/position = Vector2(556.6666, 107.333336)
 transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_kb6p2")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rkbax"]
-graph_offset = Vector2(-48.325092, -46.51241)
+graph_offset = Vector2(-100.87057, 88.93112)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_wodsf")
 nodes/StateMachine/position = Vector2(66.666664, 133.33333)
 node_connections = [&"output", 0, &"StateMachine"]

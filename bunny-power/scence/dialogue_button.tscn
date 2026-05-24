@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bd7yqxeoci00b"]
+
+[ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="1_wpadj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wpadj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlswe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5e32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_syhtj"]
+
+[node name="DialogueButton" type="Button" unique_id=1980748037]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.9490196, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0.9490196, 0, 1)
+theme_override_fonts/font = ExtResource("1_wpadj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wpadj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dlswe")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q5e32")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_syhtj")

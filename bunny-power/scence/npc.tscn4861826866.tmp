@@ -25,6 +25,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ul7y6"]
+radius = 51.088158
+
 [node name="npc" type="CharacterBody2D" unique_id=1509032494]
 script = ExtResource("1_fkmfs")
 
@@ -37,3 +40,15 @@ animation = &"IDLE"
 position = Vector2(3.5000021, 0.8676448)
 scale = Vector2(2.34375, 1.9117645)
 polygon = PackedVector2Array(0, -10, -6, 0, 0, 7, 6, 0)
+
+[node name="chat_detection_area" type="Area2D" parent="." unique_id=2089773932]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_detection_area" unique_id=735662]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_ul7y6")
+
+[node name="Timer" type="Timer" parent="." unique_id=1145345278]
+autostart = true
+
+[connection signal="body_entered" from="chat_detection_area" to="." method="_on_chat_detection_area_body_entered"]
+[connection signal="body_exited" from="chat_detection_area" to="." method="_on_chat_detection_area_body_exited"]
