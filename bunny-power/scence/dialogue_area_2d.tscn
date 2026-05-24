@@ -49,10 +49,12 @@ func _activate_dialogue() -> void:
 		else:
 			desired_dialogue_pos = dialogue_bottom_pos
 			
-	new_dialogue.global_position = desired_dialogue_pos
+	var camera = get_viewport().get_camera_2d()
+	var viewport_size = get_viewport().get_visible_rect().size
+	new_dialogue.global_position = camera.global_position - (viewport_size / 2) + Vector2(37.5, 270)
 	new_dialogue.dialogue = dialogue
 	get_parent().add_child(new_dialogue) 
-
+	print(\"camera: \", camera.global_position, \" viewport: \", viewport_size, \" dialogue pos: \", new_dialogue.global_position)
 func _on_body_entered(body: Node2D) -> void:
 	if only_activate_once and has_activated_already:
 		return
