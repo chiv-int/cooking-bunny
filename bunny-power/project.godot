@@ -18,8 +18,8 @@ config/icon="uid://lygo50i1j6js"
 
 [display]
 
-window/size/viewport_width=750
-window/size/viewport_height=550
+window/size/viewport_width=1300
+window/size/viewport_height=1200
 window/size/no_focus=true
 window/size/window_width_override=1280
 window/size/window_height_override=720

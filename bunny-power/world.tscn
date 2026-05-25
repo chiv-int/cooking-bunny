@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvy7a381wrdkx" path="res://tile/kitchen/coconut milk-96d2.png" id="8_2o6r5"]
 [ext_resource type="Texture2D" uid="uid://c3dlugcwgdadb" path="res://tile/kitchen/curry paste-96d4.png" id="9_70uel"]
 [ext_resource type="Texture2D" uid="uid://tgiqo7u2xy5x" path="res://tile/kitchen/pot copy-6536.png" id="11_ic0uy"]
+[ext_resource type="Texture2D" uid="uid://dpu3bbxsgayb3" path="res://tile/kitchen/KitchenSample.png" id="13_2o6r5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj7yv"]
 atlas = ExtResource("1_f3sb7")
@@ -194,6 +195,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o6r5"]
+bg_color = Color(0.7259576, 0.42683488, 0.33579755, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_2o6r5"]
+font_weight = 600
+
+[sub_resource type="LabelSettings" id="LabelSettings_70uel"]
+font = SubResource("SystemFont_2o6r5")
+font_size = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70uel"]
+
 [node name="World" type="Node2D" unique_id=1157158312]
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1637132722]
@@ -207,73 +220,90 @@ animation = &"new_animation"
 [node name="GameManager" type="Node" parent="." unique_id=1849195687]
 script = ExtResource("2_fj7yv")
 
-[node name="StarLabel" type="Label" parent="GameManager" unique_id=17200351]
-offset_left = 12.0
-offset_top = 467.0
-offset_right = 52.0
-offset_bottom = 490.0
-
 [node name="SaltButton" type="Button" parent="GameManager" unique_id=542628737]
-offset_left = 514.0
-offset_top = 436.0
-offset_right = 586.0
-offset_bottom = 467.0
-text = "Add Salt"
+offset_left = 319.0
+offset_top = 425.0
+offset_right = 398.0
+offset_bottom = 519.0
+flat = true
 
 [node name="SugarButton" type="Button" parent="GameManager" unique_id=2105896402]
-offset_left = 509.0
-offset_top = 389.0
-offset_right = 596.0
-offset_bottom = 420.0
-text = "Add Sugar"
+offset_left = 909.0
+offset_top = 110.0
+offset_right = 1112.0
+offset_bottom = 315.0
+flat = true
 
 [node name="CurryPasteButton" type="Button" parent="GameManager" unique_id=1800264646]
-offset_left = 508.0
-offset_top = 346.0
-offset_right = 640.0
-offset_bottom = 377.0
-text = "Add Curry Paste"
+offset_left = 66.0
+offset_top = 621.0
+offset_right = 253.0
+offset_bottom = 806.0
+flat = true
 
 [node name="CoconutMilkButton" type="Button" parent="GameManager" unique_id=307171170]
-offset_left = 506.0
-offset_top = 176.0
-offset_right = 639.0
-offset_bottom = 207.0
-text = "Add cocnut milk"
+offset_left = 79.0
+offset_top = 424.0
+offset_right = 267.0
+offset_bottom = 576.0
+flat = true
 
 [node name="CarrotButton" type="Button" parent="GameManager" unique_id=1244431271]
-offset_left = 508.0
+offset_left = 33.0
 offset_top = 217.0
-offset_right = 602.0
-offset_bottom = 248.0
-text = "Add carrot "
+offset_right = 250.0
+offset_bottom = 327.0
+flat = true
 
 [node name="GarlicButton" type="Button" parent="GameManager" unique_id=280768085]
-offset_left = 506.0
-offset_top = 257.0
-offset_right = 594.0
-offset_bottom = 288.0
-text = "Add Garlic"
+offset_left = 883.0
+offset_top = 774.0
+offset_right = 999.0
+offset_bottom = 843.0
+flat = true
 
 [node name="OnionButton" type="Button" parent="GameManager" unique_id=549607631]
-offset_left = 505.0
-offset_top = 298.0
-offset_right = 595.0
-offset_bottom = 329.0
-text = "Add Onion"
+offset_left = 852.0
+offset_top = 451.0
+offset_right = 975.0
+offset_bottom = 563.0
+flat = true
 
 [node name="ServeButton" type="Button" parent="GameManager" unique_id=1714338496]
-offset_left = 258.0
-offset_top = 404.0
-offset_right = 356.0
-offset_bottom = 435.0
-text = "Serve Curry"
+offset_left = 576.0
+offset_top = 549.0
+offset_right = 777.0
+offset_bottom = 717.0
+flat = true
 
-[node name="RequestLabel" type="Label" parent="GameManager" unique_id=213458161]
-offset_left = 27.0
-offset_top = 43.0
-offset_right = 67.0
-offset_bottom = 66.0
+[node name="PanelContainer" type="PanelContainer" parent="GameManager" unique_id=804936546]
+anchors_preset = -1
+anchor_left = -0.12200001
+anchor_top = 0.104
+anchor_right = -0.12200001
+anchor_bottom = 0.104
+offset_left = 159.6
+offset_top = 734.2
+offset_right = 431.6
+offset_bottom = 1084.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2o6r5")
+
+[node name="RequestLabel" type="Label" parent="GameManager/PanelContainer" unique_id=213458161]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_70uel")
+
+[node name="PanelContainer2" type="PanelContainer" parent="GameManager" unique_id=803381683]
+anchors_preset = -1
+anchor_bottom = 0.012
+offset_left = 879.0
+offset_top = 1099.0
+offset_right = 1301.0
+offset_bottom = 1149.6
+theme_override_styles/panel = SubResource("StyleBoxFlat_70uel")
+
+[node name="StarLabel" type="Label" parent="GameManager/PanelContainer2" unique_id=17200351]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
 [node name="PotArea" type="Node2D" parent="." unique_id=793411110]
 position = Vector2(462, 133)
@@ -281,7 +311,7 @@ position = Vector2(462, 133)
 [node name="SaltSprite" type="Sprite2D" parent="PotArea" unique_id=768325907]
 visible = false
 position = Vector2(-101, 184.74998)
-scale = Vector2(1.1562499, 1.3437517)
+scale = Vector2(1, 1.163)
 texture = ExtResource("3_pkg7o")
 
 [node name="GarlicSprite" type="Sprite2D" parent="PotArea" unique_id=450258148]
@@ -318,7 +348,7 @@ position = Vector2(-207, 176)
 texture = ExtResource("9_70uel")
 
 [node name="PotSprite" type="Sprite2D" parent="PotArea" unique_id=853440062]
-position = Vector2(-156, 210)
+position = Vector2(211.99994, 525)
 scale = Vector2(0.28371504, 0.38778877)
 texture = ExtResource("6_wse8f")
 
@@ -331,6 +361,10 @@ texture = ExtResource("7_ic0uy")
 [node name="Potfull" type="Sprite2D" parent="PotArea" unique_id=1430140835]
 visible = false
 texture = ExtResource("11_ic0uy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1403980668]
+position = Vector2(652, 598)
+texture = ExtResource("13_2o6r5")
 
 [connection signal="pressed" from="GameManager/SaltButton" to="GameManager" method="_on_salt_button_pressed"]
 [connection signal="pressed" from="GameManager/SugarButton" to="GameManager" method="_on_sugar_button_pressed"]
