@@ -146,6 +146,14 @@ func _text_resource(i: DialogueText) -> void:
 		SpeakerSprite.texture = i.speaker_img
 		SpeakerSprite.hframes = i.speaker_img_Hframes
 		SpeakerSprite.frame = 0
+		await get_tree().process_frame
+
+		# Then scale
+		var parent_size = $Panel/HBoxContainer/SpeakerParent.size
+		var sprite_size = Vector2(i.speaker_img.get_width() / i.speaker_img_Hframes, i.speaker_img.get_height())
+		var scale_factor = min(parent_size.x / sprite_size.x, parent_size.y / sprite_size.y)
+		SpeakerSprite.scale = Vector2(scale_factor, scale_factor)
+		SpeakerSprite.position = parent_size / 2
 	
 	DialogueLabel.visible_characters = 0
 	DialogueLabel.text = i.text
@@ -222,6 +230,8 @@ position = Vector2(45, 140)
 script = SubResource("GDScript_n0yra")
 
 [node name="Panel" type="Panel" parent="." unique_id=1785885793]
+offset_left = -12.0
+offset_top = -35.0
 offset_right = 565.0
 offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dl4fu")
@@ -239,11 +249,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SpeakerParent" type="Control" parent="Panel/HBoxContainer" unique_id=1994246467]
-custom_minimum_size = Vector2(100, 0)
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Panel/HBoxContainer/SpeakerParent" unique_id=2005808022]
-position = Vector2(28, 28)
+position = Vector2(45, 49)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer" unique_id=918989779]
 layout_mode = 2

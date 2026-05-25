@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://c220gxd0d7na7" path="res://scence/DialogueExportResource.gd" id="7_ii6s1"]
 [ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://scence/DialogueFunctionResource.gd" id="8_lhauw"]
 [ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://scence/DialogueTextResource.gd" id="8_q0xho"]
-[ext_resource type="Texture2D" uid="uid://4cmqhsoiesqm" path="res://sprite/steav bunny.png" id="9_00jdh"]
+[ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="9_00jdh"]
 [ext_resource type="Script" uid="uid://ctqytvgvtrtyq" path="res://scence/DialogueChoiceResource.gd" id="10_q0xho"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
@@ -1499,13 +1499,15 @@ sources/0 = SubResource("TileSetAtlasSource_036b0")
 [sub_resource type="Resource" id="Resource_00jdh"]
 script = ExtResource("8_q0xho")
 speaker_img = ExtResource("9_00jdh")
-speaker_img_rest_frame = 1
+speaker_img_Hframes = 3
 text = "wassup bunny!!!!"
 text_speed = 20.0
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_1e6yi"]
 script = ExtResource("8_q0xho")
+speaker_img = ExtResource("9_00jdh")
+speaker_img_Hframes = 3
 text = "How uni going for you???"
 text_speed = 20.0
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
@@ -1519,18 +1521,22 @@ metadata/_custom_type_script = "uid://ctqytvgvtrtyq"
 
 [sub_resource type="Resource" id="Resource_q0xho"]
 script = ExtResource("8_q0xho")
+speaker_img = ExtResource("9_00jdh")
+speaker_img_Hframes = 3
 text = "i heard you are the family cheft this year!"
 text_speed = 20.0
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_4gr7i"]
 script = ExtResource("8_q0xho")
+speaker_img = ExtResource("9_00jdh")
+speaker_img_Hframes = 3
 text = "goodluck bunbun!!!"
 text_speed = 20.0
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e6yi"]
-size = Vector2(77, 38)
+size = Vector2(77, 50)
 
 [node name="world" type="Node2D" unique_id=674599990]
 y_sort_enabled = true
@@ -1558,12 +1564,12 @@ z_index = 1
 position = Vector2(35, 23)
 
 [node name="npc" parent="." unique_id=1509032494 instance=ExtResource("5_6psia")]
-position = Vector2(80, 46)
+position = Vector2(519, 82)
 
 [node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("6_lhauw")]
 dialogue = Array[ExtResource("7_ii6s1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_dtrtd"), SubResource("Resource_q0xho"), SubResource("Resource_4gr7i")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1078223811]
-position = Vector2(85.5, 49)
+position = Vector2(525, 81)
 shape = SubResource("RectangleShape2D_1e6yi")
 debug_color = Color(0.06660176, 0.61116356, 0.6197947, 0.41960785)
