@@ -248,7 +248,6 @@ states/MoveState/position = Vector2(556.6666, 107.333336)
 transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_kb6p2")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rkbax"]
-graph_offset = Vector2(-100.87057, 88.93112)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_wodsf")
 nodes/StateMachine/position = Vector2(66.666664, 133.33333)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -260,6 +259,7 @@ script = ExtResource("1_onrkg")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1788045417]
 scale = Vector2(2, 2)
 texture = ExtResource("2_i3pqv")
+offset = Vector2(0, -11.15)
 hframes = 8
 vframes = 3
 
@@ -279,5 +279,5 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1199245991]
-position = Vector2(-1, 0)
+position = Vector2(-1, -22)
 polygon = PackedVector2Array(0, -10, -9, 9, 0, 23, 11, 9)
