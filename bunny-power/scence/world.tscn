@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="5_4gr7i"]
 [ext_resource type="PackedScene" uid="uid://c0t14n4jbhng6" path="res://scence/npc.tscn" id="5_6psia"]
 [ext_resource type="PackedScene" uid="uid://d1qeocf0b43ud" path="res://scence/ratso.tscn" id="8_lhauw"]
-[ext_resource type="PackedScene" uid="uid://b23gnup28b4gn" path="res://scence/ingredient_pickup.tscn" id="9_ii6s1"]
+[ext_resource type="PackedScene" uid="uid://dc46gsq0sxc5o" path="res://scence/onion.tscn" id="9_ii6s1"]
 
 [sub_resource type="GDScript" id="GDScript_14qux"]
 resource_name = "world"
@@ -1615,8 +1615,14 @@ position = Vector2(446, 99)
 [node name="ratso" parent="." unique_id=1110946685 instance=ExtResource("8_lhauw")]
 position = Vector2(499, 107)
 
-[node name="coconute milk" parent="." unique_id=1185353391 instance=ExtResource("9_ii6s1")]
-position = Vector2(590, 132)
+[node name="onion" parent="." unique_id=1056095657 instance=ExtResource("9_ii6s1")]
+position = Vector2(1546, 401)
+
+[node name="onion2" parent="." unique_id=1111678158 instance=ExtResource("9_ii6s1")]
+position = Vector2(1534, 406)
+
+[node name="onion3" parent="." unique_id=1761903683 instance=ExtResource("9_ii6s1")]
+position = Vector2(1542, 408)
 
 [connection signal="body_entered" from="exte/Area2D" to="exte/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="exte/Area2D" to="exte/Area2D" method="_on_body_exited"]

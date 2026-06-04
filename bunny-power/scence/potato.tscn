@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_r32gd")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 4.0
 }]
 
@@ -75,8 +75,7 @@ ingredient_name = "potato"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=877043536]
 sprite_frames = SubResource("SpriteFrames_xdja8")
-frame = 3
-frame_progress = 0.90000236
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=724297134]
 position = Vector2(-2, 1)

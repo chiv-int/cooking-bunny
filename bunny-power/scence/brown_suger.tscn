@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_gpa1a")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 4.0
 }]
 
@@ -75,6 +75,7 @@ ingredient_name = "brown_suger"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1359834462]
 sprite_frames = SubResource("SpriteFrames_7j8o1")
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=533186306]
 position = Vector2(-2, 1)

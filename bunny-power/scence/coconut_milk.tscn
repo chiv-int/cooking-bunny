@@ -53,7 +53,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40bel"]
-radius = 18.027756
+radius = 31.0
 
 [node name="coconut_milk" type="Area2D" unique_id=1185353391]
 script = SubResource("GDScript_307tc")

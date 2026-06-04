@@ -48,7 +48,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b5368")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 2.0
 }]
 
@@ -61,6 +61,7 @@ ingredient_name = "onion"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1536935935]
 sprite_frames = SubResource("SpriteFrames_vk47u")
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1577426103]
 position = Vector2(-2, 1)

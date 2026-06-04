@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_lvtfh")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 4.0
 }]
 
@@ -75,8 +75,7 @@ ingredient_name = "curry_paste"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1159955544]
 sprite_frames = SubResource("SpriteFrames_81raq")
-frame = 2
-frame_progress = 0.9203711
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=498129176]
 position = Vector2(-2, 1)

@@ -62,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_8f1na")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 4.0
 }]
 
@@ -75,7 +75,7 @@ ingredient_name = "salt"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=168224775]
 sprite_frames = SubResource("SpriteFrames_kpkth")
-frame_progress = 0.71988076
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1132702670]
 position = Vector2(-2, 1)

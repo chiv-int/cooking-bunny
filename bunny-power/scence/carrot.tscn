@@ -48,7 +48,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_sc3xv")
 }],
 "loop": true,
-"name": &"default",
+"name": &"IDLE",
 "speed": 2.0
 }]
 
@@ -60,6 +60,7 @@ script = SubResource("GDScript_307tc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=472703439]
 sprite_frames = SubResource("SpriteFrames_e0lea")
+animation = &"IDLE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=724297134]
 position = Vector2(-2, 1)
