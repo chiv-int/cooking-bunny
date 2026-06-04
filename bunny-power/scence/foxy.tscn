@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c04tdo8qxe610"]
+
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://script/npc.gd" id="1_uobol"]
+[ext_resource type="Texture2D" uid="uid://dydkfcv88lg1c" path="res://sprite/foxy.png" id="2_ubkc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kca8w"]
+atlas = ExtResource("2_ubkc7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1qcd"]
+atlas = ExtResource("2_ubkc7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebclq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kca8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1qcd")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 2.0
+}]
+
+[node name="foxy" type="CharacterBody2D" unique_id=1509032494]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_uobol")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=761635793]
+sprite_frames = SubResource("SpriteFrames_ebclq")
+animation = &"IDLE"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1631703447]
+position = Vector2(1.0000002, 2.9999998)
+scale = Vector2(2.34375, 1.9117645)
+polygon = PackedVector2Array(-8.940697e-08, -8.369231, -2.9866667, 1.1920929e-07, 0, 7, 3.4133332, 0.52307713)

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://wr061dfid7ga"]
+
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://script/npc.gd" id="1_uajdx"]
+[ext_resource type="Texture2D" uid="uid://dm5xu856v16c" path="res://sprite/dear.png" id="2_nn5xv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gk4y"]
+atlas = ExtResource("2_nn5xv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_revlt"]
+atlas = ExtResource("2_nn5xv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ni3nn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gk4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_revlt")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 2.0
+}]
+
+[node name="dear" type="CharacterBody2D" unique_id=1509032494]
+script = ExtResource("1_uajdx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1157021437]
+y_sort_enabled = true
+position = Vector2(1.1920929e-07, 2.3841858e-07)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ni3nn")
+animation = &"IDLE"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1631703447]
+position = Vector2(1, 1)
+scale = Vector2(1.225, 1)
+polygon = PackedVector2Array(-13.061224, -22, -12.244897, 12, 6.530612, 12, 6.530612, -22)

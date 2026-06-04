@@ -1,7 +1,13 @@
-[gd_scene format=3 uid="uid://ci2b1er2oq42v"]
+[gd_scene format=3 uid="uid://c0t14n4jbhng6"]
 
-[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://scence/npc.gd" id="1_fkmfs"]
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://script/npc.gd" id="1_fkmfs"]
 [ext_resource type="Texture2D" uid="uid://4cmqhsoiesqm" path="res://sprite/steav bunny.png" id="2_d4c0g"]
+[ext_resource type="PackedScene" uid="uid://b3jnajsndmpn3" path="res://scence/dialogue_area_2d.tscn" id="3_i6bhh"]
+[ext_resource type="Script" uid="uid://c220gxd0d7na7" path="res://script/DialogueExportResource.gd" id="4_3atd1"]
+[ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://script/DialogueTextResource.gd" id="5_1nphi"]
+[ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_2peuj"]
+[ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_p57ny"]
+[ext_resource type="Script" uid="uid://ctqytvgvtrtyq" path="res://script/DialogueChoiceResource.gd" id="8_wexsl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("2_d4c0g")
@@ -25,6 +31,34 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="Resource" id="Resource_00jdh"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "wassup bunny!!!!"
+text_speed = 20.0
+
+[sub_resource type="Resource" id="Resource_1e6yi"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "are you going to cook ?"
+text_speed = 20.0
+
+[sub_resource type="Resource" id="Resource_4gr7i"]
+script = ExtResource("7_p57ny")
+target_path = NodePath("/root/QuestManager")
+function_name = "start_quest"
+
+[sub_resource type="Resource" id="Resource_dtrtd"]
+script = ExtResource("8_wexsl")
+text = "(how was it?)"
+choice_text = Array[String](["yes!", "no!!"])
+choice_function_call = Array[ExtResource("7_p57ny")]([SubResource("Resource_4gr7i"), null])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6srt"]
+size = Vector2(77, 50)
+
 [node name="npc" type="CharacterBody2D" unique_id=1509032494]
 script = ExtResource("1_fkmfs")
 
@@ -37,3 +71,11 @@ animation = &"IDLE"
 position = Vector2(3.5000021, 0.8676448)
 scale = Vector2(2.34375, 1.9117645)
 polygon = PackedVector2Array(0, -10, -6, 0, 0, 7, 6, 0)
+
+[node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("3_i6bhh")]
+dialogue = Array[ExtResource("4_3atd1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_dtrtd")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1911373962]
+position = Vector2(8, -3)
+shape = SubResource("RectangleShape2D_w6srt")
+debug_color = Color(0.06660176, 0.61116356, 0.6197947, 0.41960785)

@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://cauofev3yeeg4" path="res://tile/house/TopDownHouse_DoorsAndWindows.png" id="5_wtaqj"]
 [ext_resource type="Texture2D" uid="uid://dumfl2uvdcwkr" path="res://tile/house/TopDownHouse_FurnitureState2.png" id="6_wtaqj"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="7_wtaqj"]
+[ext_resource type="PackedScene" uid="uid://blicf62rcsxla" path="res://scence/grandma.tscn" id="9_tqnrm"]
+[ext_resource type="PackedScene" uid="uid://c04tdo8qxe610" path="res://scence/foxy.tscn" id="10_yfe7f"]
+[ext_resource type="PackedScene" uid="uid://b35jm2iga1w7r" path="res://scence/p'on.tscn" id="11_jty2q"]
+[ext_resource type="PackedScene" uid="uid://d1qeocf0b43ud" path="res://scence/ratso.tscn" id="12_1woom"]
+[ext_resource type="PackedScene" uid="uid://wr061dfid7ga" path="res://scence/dear.tscn" id="13_2f1ta"]
+[ext_resource type="PackedScene" uid="uid://ct5wyckqifrp0" path="res://scence/ter.tscn" id="14_04bd5"]
 
 [sub_resource type="GDScript" id="GDScript_wigdr"]
 script/source = "# house_interior.gd
@@ -1587,7 +1593,68 @@ theme_override_font_sizes/font_size = 8
 text = "press to Exit!"
 
 [node name="player" parent="." unique_id=620609762 instance=ExtResource("2_cu515")]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(3, 245)
+
+[node name="grandma" parent="." unique_id=1509032494 instance=ExtResource("9_tqnrm")]
+position = Vector2(369, 69)
+
+[node name="foxy" parent="." unique_id=1471697291 instance=ExtResource("10_yfe7f")]
+z_index = 1
+position = Vector2(596, 175)
+
+[node name="p\'on" parent="." unique_id=1133825175 instance=ExtResource("11_jty2q")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(172, 252)
+
+[node name="ratso" parent="." unique_id=1522419105 instance=ExtResource("12_1woom")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1055, 114)
+
+[node name="p\'on2" parent="." unique_id=1651836308 instance=ExtResource("11_jty2q")]
+position = Vector2(389, 236)
+
+[node name="p\'on3" parent="." unique_id=2075245812 instance=ExtResource("11_jty2q")]
+position = Vector2(450, 93)
+
+[node name="p\'on4" parent="." unique_id=1228648362 instance=ExtResource("11_jty2q")]
+position = Vector2(713, 255)
+
+[node name="p\'on5" parent="." unique_id=2125272218 instance=ExtResource("11_jty2q")]
+position = Vector2(1110, 254)
+
+[node name="p\'on6" parent="." unique_id=1812568360 instance=ExtResource("11_jty2q")]
+position = Vector2(1177, 163)
+
+[node name="p\'on7" parent="." unique_id=1710932903 instance=ExtResource("11_jty2q")]
+position = Vector2(114, 94)
+
+[node name="p\'on8" parent="." unique_id=327549160 instance=ExtResource("11_jty2q")]
+position = Vector2(101, 123)
+
+[node name="p\'on9" parent="." unique_id=98984855 instance=ExtResource("11_jty2q")]
+position = Vector2(147, 241)
+
+[node name="p\'on10" parent="." unique_id=1038135841 instance=ExtResource("11_jty2q")]
+position = Vector2(78, 239)
+
+[node name="p\'on11" parent="." unique_id=1501115310 instance=ExtResource("11_jty2q")]
+position = Vector2(530, 235)
+
+[node name="p\'on12" parent="." unique_id=1767186403 instance=ExtResource("11_jty2q")]
+position = Vector2(531, 252)
+
+[node name="dear" parent="." unique_id=187134197 instance=ExtResource("13_2f1ta")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(858, 190)
+
+[node name="ter" parent="." unique_id=847586561 instance=ExtResource("14_04bd5")]
+z_index = 1
+position = Vector2(363, 203)
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_body_exited"]

@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bklysya8k0e1n"]
+
+[ext_resource type="Texture2D" uid="uid://dts0ypv80si5w" path="res://sprite/suger.png" id="1_grtcj"]
+[ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="2_nf6t4"]
+
+[sub_resource type="GDScript" id="GDScript_307tc"]
+resource_name = "ingredient_pickup.gd"
+script/source = "extends Area2D
+
+@export var ingredient_name: String = \"carrot\"
+var player_nearby = false
+
+func _ready():
+	$Label.visible = false
+	$AnimatedSprite2D.play(\"IDLE\")  # plays your animation on spawn
+
+func _on_body_entered(body):
+	if body.is_in_group(\"player\"):
+		player_nearby = true
+		$Label.visible = true
+
+func _on_body_exited(body):
+	if body.is_in_group(\"player\"):
+		player_nearby = false
+		$Label.visible = false
+
+func _input(event):
+	if event.is_action_pressed(\"ui_accept\") and player_nearby:
+		QuestManager.collect_ingredient(ingredient_name)
+		queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elll6"]
+atlas = ExtResource("1_grtcj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt6wc"]
+atlas = ExtResource("1_grtcj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nllc"]
+atlas = ExtResource("1_grtcj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpa1a"]
+atlas = ExtResource("1_grtcj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7j8o1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elll6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt6wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nllc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpa1a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40bel"]
+radius = 18.027756
+
+[node name="brown_suger" type="Area2D" unique_id=1177628445]
+script = SubResource("GDScript_307tc")
+ingredient_name = "brown_suger"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1359834462]
+sprite_frames = SubResource("SpriteFrames_7j8o1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=533186306]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_40bel")
+
+[node name="Label" type="Label" parent="." unique_id=159615641]
+offset_left = -12.0
+offset_top = 19.0
+offset_right = 13.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_fonts/font = ExtResource("2_nf6t4")
+theme_override_font_sizes/font_size = 10
+text = "Enter"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

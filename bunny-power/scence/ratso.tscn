@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://d1qeocf0b43ud"]
+
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://script/npc.gd" id="1_rheea"]
+[ext_resource type="Texture2D" uid="uid://rgd2dx2y0hu8" path="res://sprite/ratso.png" id="2_rp12r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4htcg"]
+atlas = ExtResource("2_rp12r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h134u"]
+atlas = ExtResource("2_rp12r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbs3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4htcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h134u")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}]
+
+[node name="ratso" type="CharacterBody2D" unique_id=1509032494]
+scale = Vector2(2, 2)
+script = ExtResource("1_rheea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=744585362]
+sprite_frames = SubResource("SpriteFrames_wbs3o")
+animation = &"IDLE"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1631703447]
+y_sort_enabled = true
+position = Vector2(1.0000002, 2.9999998)
+scale = Vector2(2.34375, 1.9117645)
+polygon = PackedVector2Array(-3.4133332, -6.0153847, -3.4133332, 3.4000006, 4.9066663, 3.661539, 4.9066663, -6.0153847)

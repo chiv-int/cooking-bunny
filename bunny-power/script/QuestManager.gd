@@ -1,0 +1,74 @@
+# QuestManager.gd
+extends Node
+
+signal quest_started
+signal ingredient_collected(ingredient_name: String, amount: int)
+signal all_ingredients_ready
+
+enum QuestState {
+	NOT_STARTED,
+	STARTED,
+	READY_TO_COOK,
+	COMPLETED
+}
+
+var current_state: QuestState = QuestState.NOT_STARTED
+var came_from_house: bool = false
+
+var inventory: Dictionary = {
+	# required ingredients
+	"carrot": 0,
+	"onion": 0,
+	"potato": 0,
+	"garlic": 0,
+	"curry_paste": 0,
+	"coconut_milk": 0,
+	"salt": 0,
+	"brown_sugar": 0,
+	# decoy ingredients
+	"chili": 0,
+	"extra_sugar": 0,
+	"butter": 0,
+	"fish_sauce": 0
+}
+
+var required_amounts: Dictionary = {
+	"carrot": 3,
+	"onion": 2,
+	"potato": 2,
+	"garlic": 3,
+	"curry_paste": 1,
+	"coconut_milk": 1,
+	"salt": 1,
+	"brown_sugar": 3
+}
+
+func start_quest() -> void:
+	print("start_quest called, current state: ", current_state)
+	if current_state != QuestState.NOT_STARTED:
+		print("blocked by state check")
+		return
+	current_state = QuestState.STARTED
+	emit_signal("quest_started")
+	print("signal emitted!")
+
+func collect_ingredient(ingredient_name: String) -> void:
+	if inventory.has(ingredient_name):
+		inventory[ingredient_name] += 1
+		print("Collected: ", ingredient_name, " | Total: ", inventory[ingredient_name])
+		emit_signal("ingredient_collected", ingredient_name, inventory[ingredient_name])
+		_check_all_collected()
+
+func _check_all_collected() -> void:
+	for ingredient in required_amounts:
+		if inventory[ingredient] < required_amounts[ingredient]:
+			return
+	current_state = QuestState.READY_TO_COOK
+	emit_signal("all_ingredients_ready")
+	print("All ingredients ready!")
+
+func has_enough(ingredient_name: String) -> bool:
+	return inventory.get(ingredient_name, 0) >= required_amounts.get(ingredient_name, 1)
+
+func is_quest_active() -> bool:
+	return current_state != QuestState.NOT_STARTED

@@ -7,13 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://j7okpmvv4adn" path="res://tile/Tiled_files/exterior.png" id="3_dtrtd"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="5_4gr7i"]
 [ext_resource type="PackedScene" uid="uid://c0t14n4jbhng6" path="res://scence/npc.tscn" id="5_6psia"]
-[ext_resource type="PackedScene" uid="uid://b3jnajsndmpn3" path="res://scence/dialogue_area_2d.tscn" id="6_lhauw"]
-[ext_resource type="Script" path="res://scence/DialogueExportResource.gd" id="7_ii6s1"]
-[ext_resource type="Script" path="res://scence/DialogueFunctionResource.gd" id="8_lhauw"]
-[ext_resource type="Script" path="res://scence/DialogueTextResource.gd" id="8_q0xho"]
-[ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="9_00jdh"]
-[ext_resource type="Script" path="res://scence/DialogueChoiceResource.gd" id="10_q0xho"]
-[ext_resource type="PackedScene" uid="uid://brt72ulcrrcck" path="res://scence/quest_popup.tscn" id="12_1e6yi"]
+[ext_resource type="PackedScene" uid="uid://d1qeocf0b43ud" path="res://scence/ratso.tscn" id="8_lhauw"]
+[ext_resource type="PackedScene" uid="uid://b23gnup28b4gn" path="res://scence/ingredient_pickup.tscn" id="9_ii6s1"]
 
 [sub_resource type="GDScript" id="GDScript_14qux"]
 resource_name = "world"
@@ -1558,34 +1553,6 @@ func _input(event):
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gr7i"]
 
-[sub_resource type="Resource" id="Resource_00jdh"]
-script = ExtResource("8_q0xho")
-speaker_img = ExtResource("9_00jdh")
-speaker_img_Hframes = 3
-text = "wassup bunny!!!!"
-text_speed = 20.0
-
-[sub_resource type="Resource" id="Resource_1e6yi"]
-script = ExtResource("8_q0xho")
-speaker_img = ExtResource("9_00jdh")
-speaker_img_Hframes = 3
-text = "are you going to cook ?"
-text_speed = 20.0
-
-[sub_resource type="Resource" id="Resource_4gr7i"]
-script = ExtResource("8_lhauw")
-target_path = NodePath("/root/QuestManager")
-function_name = "start_quest"
-
-[sub_resource type="Resource" id="Resource_dtrtd"]
-script = ExtResource("10_q0xho")
-text = "(how was it?)"
-choice_text = Array[String](["yes!", "no!!"])
-choice_function_call = Array[ExtResource("8_lhauw")]([SubResource("Resource_4gr7i"), null])
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e6yi"]
-size = Vector2(77, 50)
-
 [node name="world" type="Node2D" unique_id=674599990]
 y_sort_enabled = true
 position = Vector2(5, 0)
@@ -1624,32 +1591,32 @@ position = Vector2(615.5, 220)
 shape = SubResource("RectangleShape2D_4gr7i")
 
 [node name="Label" type="Label" parent="exte/Area2D" unique_id=87513698]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 625.5
+offset_top = 233.0
+offset_right = 665.5
+offset_bottom = 244.5
+size_flags_horizontal = 3
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("5_4gr7i")
 theme_override_font_sizes/font_size = 8
 text = "press Enter!"
+horizontal_alignment = 1
 
 [node name="player" parent="." unique_id=620609762 instance=ExtResource("1_f3sb7")]
 z_index = 1
 position = Vector2(35, 23)
 
-[node name="npc" parent="." unique_id=1509032494 instance=ExtResource("5_6psia")]
-y_sort_enabled = true
-position = Vector2(519, 82)
-
-[node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("6_lhauw")]
-dialogue = Array[ExtResource("7_ii6s1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_dtrtd")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1078223811]
-position = Vector2(525, 81)
-shape = SubResource("RectangleShape2D_1e6yi")
-debug_color = Color(0.06660176, 0.61116356, 0.6197947, 0.41960785)
-
-[node name="QuestPopup" parent="." unique_id=914637263 instance=ExtResource("12_1e6yi")]
-
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=2125321895]
 position = Vector2(1269, 491)
+
+[node name="npc" parent="." unique_id=1509032494 instance=ExtResource("5_6psia")]
+position = Vector2(446, 99)
+
+[node name="ratso" parent="." unique_id=1110946685 instance=ExtResource("8_lhauw")]
+position = Vector2(499, 107)
+
+[node name="coconute milk" parent="." unique_id=1185353391 instance=ExtResource("9_ii6s1")]
+position = Vector2(590, 132)
 
 [connection signal="body_entered" from="exte/Area2D" to="exte/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="exte/Area2D" to="exte/Area2D" method="_on_body_exited"]

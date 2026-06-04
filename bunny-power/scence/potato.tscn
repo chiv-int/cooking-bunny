@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bjkhgpgh5hsga"]
+
+[ext_resource type="Texture2D" uid="uid://dir8utts35l2l" path="res://sprite/potato.png" id="1_set7s"]
+[ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="2_52g80"]
+
+[sub_resource type="GDScript" id="GDScript_307tc"]
+resource_name = "ingredient_pickup.gd"
+script/source = "extends Area2D
+
+@export var ingredient_name: String = \"carrot\"
+var player_nearby = false
+
+func _ready():
+	$Label.visible = false
+	$AnimatedSprite2D.play(\"IDLE\")  # plays your animation on spawn
+
+func _on_body_entered(body):
+	if body.is_in_group(\"player\"):
+		player_nearby = true
+		$Label.visible = true
+
+func _on_body_exited(body):
+	if body.is_in_group(\"player\"):
+		player_nearby = false
+		$Label.visible = false
+
+func _input(event):
+	if event.is_action_pressed(\"ui_accept\") and player_nearby:
+		QuestManager.collect_ingredient(ingredient_name)
+		queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_141kb"]
+atlas = ExtResource("1_set7s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s1pi"]
+atlas = ExtResource("1_set7s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqqpy"]
+atlas = ExtResource("1_set7s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r32gd"]
+atlas = ExtResource("1_set7s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdja8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_141kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s1pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqqpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r32gd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40bel"]
+radius = 18.027756
+
+[node name="potato" type="Area2D" unique_id=1185353391]
+script = SubResource("GDScript_307tc")
+ingredient_name = "potato"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=877043536]
+sprite_frames = SubResource("SpriteFrames_xdja8")
+frame = 3
+frame_progress = 0.90000236
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=724297134]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_40bel")
+
+[node name="Label" type="Label" parent="." unique_id=1330288511]
+offset_left = -12.0
+offset_top = 19.0
+offset_right = 13.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_fonts/font = ExtResource("2_52g80")
+theme_override_font_sizes/font_size = 10
+text = "Enter"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

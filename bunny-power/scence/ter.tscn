@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://ct5wyckqifrp0"]
+
+[ext_resource type="Script" uid="uid://yglm6qi1iwc8" path="res://script/npc.gd" id="1_pkxnh"]
+[ext_resource type="Texture2D" uid="uid://dcw4f3fyqooyn" path="res://sprite/engineering bunny.png" id="2_4a0jy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxd8b"]
+atlas = ExtResource("2_4a0jy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lpjo"]
+atlas = ExtResource("2_4a0jy")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0m2k4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxd8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lpjo")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}]
+
+[node name="ter" type="CharacterBody2D" unique_id=1509032494]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_pkxnh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=955914014]
+sprite_frames = SubResource("SpriteFrames_0m2k4")
+animation = &"IDLE"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1631703447]
+position = Vector2(1.0000002, 2.9999998)
+scale = Vector2(2.34375, 1.9117645)
+polygon = PackedVector2Array(-8.940697e-08, -8.369231, -2.9866667, 1.1920929e-07, 0, 7, 3.4133332, 0.52307713)
