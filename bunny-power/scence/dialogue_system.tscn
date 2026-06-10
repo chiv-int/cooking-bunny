@@ -56,7 +56,16 @@ func _process(_delta: float) -> void:
 			next_item = true
 	
 func _function_resource(i: DialogueFunction) -> void:
-	var target_node = get_node(i.target_path)
+	print(\"_function_resource called! path: \", i.target_path, \" function: \", i.function_name)
+	var target_node = _get_node_from_path(i.target_path)
+	if not target_node:
+	# try absolute path from root
+		target_node = get_tree().root.get_node_or_null(i.target_path)
+	if not target_node:
+		print(\"Could not find node at path: \", i.target_path)
+		current_dialogue_item += 1
+		next_item = true
+		return
 	if target_node.has_method(i.function_name):
 		if i.function_arguments.size() == 0:
 			target_node.call(i.function_name)
@@ -70,7 +79,6 @@ func _function_resource(i: DialogueFunction) -> void:
 			target_node.connect(signal_name, callable, CONNECT_ONE_SHOT)
 			while not signal_state.done:
 				await get_tree().process_frame
-	
 	current_dialogue_item += 1
 	next_item = true
 
@@ -88,20 +96,23 @@ func _choice_resource(i: DialogueChoice) -> void:
 	$Panel/HBoxContainer/VBoxContainer/button_container.visible = true
 
 	for item in i.choice_text.size():
+		var choice_name = i.choice_text[item].to_lower()
+		if QuestManager.shop_stock.has(choice_name) and QuestManager.shop_stock[choice_name] <= 0:
+			continue
 		var DialogueButtonVar = DialogueButtonPreLoad.instantiate()
 		DialogueButtonVar.text = i.choice_text[item]
 
 		var function_resource: DialogueFunction = i.choice_function_call[item]
 		if function_resource:
 			DialogueButtonVar.connect(\"pressed\",
-				Callable(get_node(function_resource.target_path), function_resource.function_name).bindv(function_resource.function_arguments),
+				Callable(_get_node_from_path(function_resource.target_path), function_resource.function_name).bindv(function_resource.function_arguments),
 				CONNECT_ONE_SHOT)  # <-- Callable() is properly closed here
 
 			if function_resource.hide_dialogue_box:
 				DialogueButtonVar.connect(\"pressed\", hide, CONNECT_ONE_SHOT)
 
 			DialogueButtonVar.connect(\"pressed\",
-				_choice_button_pressed.bind(get_node(function_resource.target_path), function_resource.wait_for_signal_to_continue),
+				_choice_button_pressed.bind(_get_node_from_path(function_resource.target_path), function_resource.wait_for_signal_to_continue),
 				CONNECT_ONE_SHOT)
 		else:
 			DialogueButtonVar.connect(\"pressed\",
@@ -193,6 +204,22 @@ func _text_resource(i: DialogueText) -> void:
 				next_item = true
 				
 				#set speaker name here as well!
+
+func _get_node_from_path(path: String) -> Node:
+	var node = get_node_or_null(path)
+	if node:
+		print(\"found via get_node: \", path)
+		return node
+	node = get_tree().root.get_node_or_null(path)
+	if node:
+		print(\"found via root: \", path)
+		return node
+	var nodes = get_tree().get_nodes_in_group(path)
+	print(\"group search for '\", path, \"' found: \", nodes.size(), \" nodes\")
+	if nodes.size() > 0:
+		return nodes[0]
+	return null
+
 
 func _text_without_square_brackets(text: String) -> String:
 	var result: String = \"\"

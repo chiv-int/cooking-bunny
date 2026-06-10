@@ -2,62 +2,120 @@
 
 [sub_resource type="GDScript" id="GDScript_r6n1a"]
 script/source = "extends Area2D
+
 const DialogueSystemPreload = preload(\"res://scence/dialogue_system.tscn\")
-@export var activate_instant: bool
-@export var only_activate_once: bool
-@export var override_dialogue_position: bool
-@export var override_position: Vector2
+
+@export var activate_instant: bool = false
+@export var only_activate_once: bool = false
+@export var override_dialogue_position: bool = false
+@export var override_position: Vector2 = Vector2.ZERO
 @export var dialogue: Array[DE]
+@export var loop_dialogue: Array[DE]
+@export var is_shop: bool = false
 
 var dialogue_top_pos: Vector2 = Vector2(160, 48)
 var dialogue_bottom_pos: Vector2 = Vector2(160, 192)
 
 var player_body_in: bool = false
 var has_activated_already: bool = false
-var desired_dialogue_pos: Vector2
-
 var player_node: CharacterBody2D = null
+var active_dialogue = null
+var is_restarting: bool = false
+var has_introduced: bool = false
 
 func _ready() -> void:
+	_find_player()
+
+
+func _find_player() -> void:
 	for i in get_tree().get_nodes_in_group(\"player\"):
 		player_node = i
 
 func _process(_delta: float) -> void:
-	
 	if !player_node:
-		for i in get_tree().get_nodes_in_group(\"player\"):
-			player_node = i
+		_find_player()
 		return
-	if !activate_instant and player_body_in:
-		if only_activate_once and has_activated_already:
-			set_process(false)
-			return
-			
-		if Input.is_action_just_pressed(\"ui_accept\"):
-			_activate_dialogue()
-			player_body_in = false
-		
+	if activate_instant:
+		return
+	if !player_body_in:
+		return
+	if only_activate_once and has_activated_already:
+		set_process(false)
+		return
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		_activate_dialogue()
+
 func _activate_dialogue() -> void:
+	if !player_node:
+		return
+	if active_dialogue and is_instance_valid(active_dialogue):
+		return  # dont open if one already running
 	player_node.can_move = false
-	
-	var new_dialogue = DialogueSystemPreload.instantiate()
-	if override_dialogue_position:
-		desired_dialogue_pos = override_position
-	else:
-		if player_node.global_position.y > get_viewport().get_camera_2d().global_position.y:
-			desired_dialogue_pos = dialogue_top_pos
-		else:
-			desired_dialogue_pos = dialogue_bottom_pos
-			
+	has_activated_already = true
+
 	var camera = get_viewport().get_camera_2d()
 	var viewport_size = get_viewport().get_visible_rect().size
+
+	var new_dialogue = DialogueSystemPreload.instantiate()
+	
+	if is_shop and has_introduced and loop_dialogue.size() > 0:
+		new_dialogue.dialogue = loop_dialogue
+	else:
+		new_dialogue.dialogue = dialogue
+		if is_shop:
+			has_introduced = true
+	
 	new_dialogue.global_position = camera.global_position - (viewport_size / 2) + Vector2(37.5, 270)
-	new_dialogue.dialogue = dialogue
-	get_parent().add_child(new_dialogue) 
-	print(\"camera: \", camera.global_position, \" viewport: \", viewport_size, \" dialogue pos: \", new_dialogue.global_position)
-func _on_body_entered(body: Node2D) -> void:
-	if only_activate_once and has_activated_already:
+	active_dialogue = new_dialogue
+	get_parent().add_child(new_dialogue)
+
+
+func restart_shop() -> void:
+	print(\"restart_shop called!\")
+	if is_restarting:
+		print(\"blocked by is_restarting\")
 		return
+	is_restarting = true
+	print(\"waiting for frames...\")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if active_dialogue and is_instance_valid(active_dialogue):
+		active_dialogue.queue_free()
+		active_dialogue = null
+		print(\"old dialogue cleared\")
+	await get_tree().process_frame
+	is_restarting = false
+	print(\"calling _activate_loop_dialogue\")
+	_activate_loop_dialogue()
+
+
+func _activate_loop_dialogue() -> void:
+	print(\"_activate_loop_dialogue called!\")
+	if !player_node:
+		print(\"no player node!\")
+		return
+	if active_dialogue and is_instance_valid(active_dialogue):
+		print(\"active dialogue still exists, blocked!\")
+		return
+	player_node.can_move = false
+	var camera = get_viewport().get_camera_2d()
+	var viewport_size = get_viewport().get_visible_rect().size
+	var new_dialogue = DialogueSystemPreload.instantiate()
+	new_dialogue.dialogue = loop_dialogue
+	new_dialogue.global_position = camera.global_position - (viewport_size / 2) + Vector2(37.5, 270)
+	active_dialogue = new_dialogue
+	get_parent().add_child(new_dialogue)
+	print(\"loop dialogue started!\")
+
+func end_shop() -> void:
+	if player_node:
+		player_node.can_move = true
+	has_introduced = false
+	if active_dialogue and is_instance_valid(active_dialogue):
+		active_dialogue.queue_free()
+		active_dialogue = null
+
+func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"player\"):
 		player_body_in = true
 		if activate_instant:

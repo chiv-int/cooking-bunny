@@ -1,9 +1,9 @@
-# QuestManager.gd
 extends Node
 
 signal quest_started
 signal ingredient_collected(ingredient_name: String, amount: int)
 signal all_ingredients_ready
+signal shop_purchase_made
 
 enum QuestState {
 	NOT_STARTED,
@@ -16,7 +16,6 @@ var current_state: QuestState = QuestState.NOT_STARTED
 var came_from_house: bool = false
 
 var inventory: Dictionary = {
-	# required ingredients
 	"carrot": 0,
 	"onion": 0,
 	"potato": 0,
@@ -25,7 +24,6 @@ var inventory: Dictionary = {
 	"coconut_milk": 0,
 	"salt": 0,
 	"brown_sugar": 0,
-	# decoy ingredients
 	"chili": 0,
 	"extra_sugar": 0,
 	"butter": 0,
@@ -43,21 +41,43 @@ var required_amounts: Dictionary = {
 	"brown_sugar": 3
 }
 
+var shop_stock: Dictionary = {
+	"garlic": 3,
+	"onion": 2,
+	"chili": 3,
+	"butter": 2,
+	"fish_sauce": 1,
+	"salt": 2
+}
+
 func start_quest() -> void:
-	print("start_quest called, current state: ", current_state)
 	if current_state != QuestState.NOT_STARTED:
-		print("blocked by state check")
+		print("Quest already started, blocked")
 		return
 	current_state = QuestState.STARTED
 	emit_signal("quest_started")
-	print("signal emitted!")
+	print("Quest started!")
 
 func collect_ingredient(ingredient_name: String) -> void:
-	if inventory.has(ingredient_name):
-		inventory[ingredient_name] += 1
-		print("Collected: ", ingredient_name, " | Total: ", inventory[ingredient_name])
-		emit_signal("ingredient_collected", ingredient_name, inventory[ingredient_name])
-		_check_all_collected()
+	if not inventory.has(ingredient_name):
+		print("Unknown ingredient: ", ingredient_name)
+		return
+	inventory[ingredient_name] += 1
+	print("Collected: ", ingredient_name, " | Total: ", inventory[ingredient_name])
+	emit_signal("ingredient_collected", ingredient_name, inventory[ingredient_name])
+	_check_all_collected()
+
+func buy_ingredient(ingredient_name: String, amount: int = 1) -> void:
+	if not shop_stock.has(ingredient_name):
+		print("Item not sold here: ", ingredient_name)
+		return
+	if shop_stock[ingredient_name] < amount:
+		print("Out of stock: ", ingredient_name)
+		return
+	shop_stock[ingredient_name] -= amount
+	collect_ingredient(ingredient_name)
+	print("Bought: ", amount, "x ", ingredient_name, " | Stock left: ", shop_stock[ingredient_name])
+	emit_signal("shop_purchase_made")
 
 func _check_all_collected() -> void:
 	for ingredient in required_amounts:
@@ -65,7 +85,7 @@ func _check_all_collected() -> void:
 			return
 	current_state = QuestState.READY_TO_COOK
 	emit_signal("all_ingredients_ready")
-	print("All ingredients ready!")
+	print("All ingredients ready! Time to cook!")
 
 func has_enough(ingredient_name: String) -> bool:
 	return inventory.get(ingredient_name, 0) >= required_amounts.get(ingredient_name, 1)

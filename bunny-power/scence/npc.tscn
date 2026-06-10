@@ -6,8 +6,6 @@
 [ext_resource type="Script" uid="uid://c220gxd0d7na7" path="res://script/DialogueExportResource.gd" id="4_3atd1"]
 [ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://script/DialogueTextResource.gd" id="5_1nphi"]
 [ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_2peuj"]
-[ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_p57ny"]
-[ext_resource type="Script" uid="uid://ctqytvgvtrtyq" path="res://script/DialogueChoiceResource.gd" id="8_wexsl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("2_d4c0g")
@@ -35,26 +33,59 @@ animations = [{
 script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
-text = "wassup bunny!!!!"
+text = "Hello bunbun!!!"
 text_speed = 20.0
 
 [sub_resource type="Resource" id="Resource_1e6yi"]
 script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
-text = "are you going to cook ?"
+text = "what's uppppppppp"
 text_speed = 20.0
 
-[sub_resource type="Resource" id="Resource_4gr7i"]
-script = ExtResource("7_p57ny")
-target_path = NodePath("/root/QuestManager")
-function_name = "start_quest"
+[sub_resource type="Resource" id="Resource_o0qch"]
+script = ExtResource("5_1nphi")
+speaker_img_Hframes = 0
+text = "hello cousin !"
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
-[sub_resource type="Resource" id="Resource_dtrtd"]
-script = ExtResource("8_wexsl")
-text = "(how was it?)"
-choice_text = Array[String](["yes!", "no!!"])
-choice_function_call = Array[ExtResource("7_p57ny")]([SubResource("Resource_4gr7i"), null])
+[sub_resource type="Resource" id="Resource_u10sy"]
+script = ExtResource("5_1nphi")
+text = "i want to buy some potato from you!"
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_i6bhh"]
+script = ExtResource("5_1nphi")
+text = "will that we alright? "
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_3atd1"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "hey not so fast, you don;'t need to pay me "
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_1nphi"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "BUT"
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_2peuj"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "you need to answer my question first!!"
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_p57ny"]
+script = ExtResource("5_1nphi")
+speaker_img = ExtResource("6_2peuj")
+speaker_img_Hframes = 3
+text = "hence you will get the potatos "
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6srt"]
 size = Vector2(77, 50)
@@ -73,7 +104,7 @@ scale = Vector2(2.34375, 1.9117645)
 polygon = PackedVector2Array(0, -10, -6, 0, 0, 7, 6, 0)
 
 [node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("3_i6bhh")]
-dialogue = Array[ExtResource("4_3atd1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_dtrtd")])
+dialogue = Array[ExtResource("4_3atd1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_o0qch"), SubResource("Resource_u10sy"), SubResource("Resource_i6bhh"), SubResource("Resource_3atd1"), SubResource("Resource_1nphi"), SubResource("Resource_2peuj"), SubResource("Resource_p57ny")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1911373962]
 position = Vector2(8, -3)
