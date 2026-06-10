@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://bl1ckswqw0dbq"]
 
 [ext_resource type="PackedScene" uid="uid://dt0w7rusirg8i" path="res://player/player.tscn" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://b67mxp50heas5" path="res://tile/ForgottenMemories/TileSet.png" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://b67mxp50heas5" path="res://tile/tree/TileSet.png" id="1_fj7yv"]
 [ext_resource type="TileSet" uid="uid://doabnit2ew74a" path="res://tile/land/road.tres" id="2_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://bpxgw4y3j8v18" path="res://tile/ForgottenMemories/Props.png" id="3_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://j7okpmvv4adn" path="res://tile/Tiled_files/exterior.png" id="3_dtrtd"]
+[ext_resource type="Texture2D" uid="uid://bpxgw4y3j8v18" path="res://tile/tree/Props.png" id="3_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://j7okpmvv4adn" path="res://tile/exterior&interior/exterior.png" id="3_dtrtd"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="5_4gr7i"]
 [ext_resource type="PackedScene" uid="uid://c0t14n4jbhng6" path="res://scence/npc.tscn" id="5_6psia"]
 [ext_resource type="PackedScene" uid="uid://d1qeocf0b43ud" path="res://scence/ratso.tscn" id="8_lhauw"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b23gnup28b4gn"]
 
-[ext_resource type="Texture2D" uid="uid://bk0r2dgvc35mx" path="res://ingredients/coconut milk-96d2.png" id="1_574p7"]
+[ext_resource type="Texture2D" uid="uid://bk0r2dgvc35mx" path="res://tile/ingredients/coconut milk-96d2.png" id="1_574p7"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="2_2yqx2"]
 
 [sub_resource type="GDScript" id="GDScript_307tc"]
