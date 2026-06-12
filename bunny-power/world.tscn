@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c01ek74ba7cfm" path="res://world/player.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://p44g8tf4byd7" path="res://world/game_manager.gd" id="2_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://c7vcn1vbspsd1" path="res://tile/kitchen/note.png" id="3_70uel"]
 [ext_resource type="Texture2D" uid="uid://co01b23l5jouf" path="res://tile/kitchen/salt-96d9.png" id="3_pkg7o"]
 [ext_resource type="Texture2D" uid="uid://df6n8sp51un7w" path="res://tile/kitchen/garlic-96d6.png" id="4_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://c3oxi6mr35rvc" path="res://tile/kitchen/potato-96ec.png" id="5_ic0uy"]
@@ -12,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bvy7a381wrdkx" path="res://tile/kitchen/coconut milk-96d2.png" id="8_2o6r5"]
 [ext_resource type="Texture2D" uid="uid://c3dlugcwgdadb" path="res://tile/kitchen/curry paste-96d4.png" id="9_70uel"]
 [ext_resource type="Texture2D" uid="uid://dv6kg0mvoafbx" path="res://tile/kitchen/matchafrfinal.png" id="12_2o6r5"]
-[ext_resource type="Texture2D" uid="uid://dyjbj5svyw2dv" path="res://tile/kitchen/kitchenfr.png" id="12_k3n1d"]
+[ext_resource type="Texture2D" uid="uid://dl8rmeabuumx" path="res://tile/kitchen/Kitchen.png" id="13_2o6r5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj7yv"]
 atlas = ExtResource("1_f3sb7")
@@ -195,20 +196,43 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o6r5"]
-bg_color = Color(0.7259576, 0.42683488, 0.33579755, 1)
-
 [sub_resource type="SystemFont" id="SystemFont_2o6r5"]
 font_weight = 600
 
 [sub_resource type="LabelSettings" id="LabelSettings_70uel"]
 font = SubResource("SystemFont_2o6r5")
 font_size = 26
+font_color = Color(0.04, 0.04, 0.04, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70uel"]
+bg_color = Color(0.51, 0.153, 0, 0.6392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiqwa"]
+bg_color = Color(0.99607843, 0.6, 0.6, 0.8235294)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2o6r5"]
+font_size = 23
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2u3nc"]
+bg_color = Color(0.39167997, 0.68, 0.31960002, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k3n1d"]
 load_path = "res://.godot/imported/soup.png-02f6bd31c17c1466a7707c4d3c81a525.ctex"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70uel"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 18.0
+initial_velocity_min = 40.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+color = Color(0.98, 0.98, 0.98, 1)
 
 [sub_resource type="Gradient" id="Gradient_70uel"]
 
@@ -307,34 +331,67 @@ offset_right = 777.0
 offset_bottom = 717.0
 flat = true
 
-[node name="PanelContainer" type="PanelContainer" parent="GameManager" unique_id=804936546]
+[node name="PanelContainer" type="TextureRect" parent="GameManager" unique_id=1853500170]
 anchors_preset = -1
 anchor_left = -0.12200001
 anchor_top = 0.104
 anchor_right = -0.12200001
 anchor_bottom = 0.104
-offset_left = 159.6
-offset_top = 734.2
-offset_right = 431.6
-offset_bottom = 1084.2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2o6r5")
+offset_left = 160.6
+offset_top = 703.2
+offset_right = 452.6
+offset_bottom = 1076.2
+texture = ExtResource("3_70uel")
+expand_mode = 1
 
 [node name="RequestLabel" type="Label" parent="GameManager/PanelContainer" unique_id=213458161]
-layout_mode = 2
+layout_mode = 0
+offset_left = 34.0
+offset_top = 25.0
+offset_right = 272.0
+offset_bottom = 193.0
 label_settings = SubResource("LabelSettings_70uel")
 
-[node name="PanelContainer2" type="PanelContainer" parent="GameManager" unique_id=803381683]
+[node name="PanelContainer2" type="PanelContainer" parent="GameManager" unique_id=347757149]
+visible = false
 anchors_preset = -1
 anchor_bottom = 0.012
-offset_left = 879.0
-offset_top = 1099.0
-offset_right = 1301.0
-offset_bottom = 1149.6
+offset_left = 330.0
+offset_top = 605.0
+offset_right = 1045.0
+offset_bottom = 724.6
 theme_override_styles/panel = SubResource("StyleBoxFlat_70uel")
 
 [node name="StarLabel" type="Label" parent="GameManager/PanelContainer2" unique_id=17200351]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
+autowrap_trim_flags = 128
+
+[node name="FeedbackPanel" type="PanelContainer" parent="GameManager" unique_id=1406907278]
+visible = false
+custom_minimum_size = Vector2(300, 150)
+anchors_preset = -1
+anchor_bottom = 0.017
+offset_left = 389.0
+offset_top = 861.0
+offset_right = 1067.0
+offset_bottom = 1074.6
+theme_override_styles/panel = SubResource("StyleBoxFlat_hiqwa")
+
+[node name="FeedbackLabel" type="Label" parent="GameManager/FeedbackPanel" unique_id=1860544853]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_2o6r5")
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="GameManager" unique_id=1061986141]
+visible = false
+offset_left = 867.0
+offset_top = 862.0
+offset_right = 1067.0
+offset_bottom = 924.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_2u3nc")
+text = "Cook Again"
 
 [node name="PotArea" type="Node2D" parent="." unique_id=793411110]
 position = Vector2(462, 133)
@@ -409,6 +466,11 @@ modulate = Color(1, 1, 1, 0.39215687)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("12_2o6r5")
 
+[node name="SteamParticles" type="GPUParticles2D" parent="PotArea" unique_id=791251976]
+position = Vector2(216, 428)
+lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_70uel")
+
 [node name="StoveLight" type="PointLight2D" parent="." unique_id=2027435066]
 position = Vector2(526, 194)
 rotation = 0.12391838
@@ -418,10 +480,11 @@ texture = SubResource("GradientTexture2D_hiqwa")
 texture_scale = 0.2
 
 [node name="StoveLight2" type="PointLight2D" parent="." unique_id=980998608]
-position = Vector2(26, 5)
-scale = Vector2(1, 0.99999994)
+position = Vector2(458.5, 153.5)
+scale = Vector2(1.7968748, 1.7968745)
 color = Color(1, 0.41568628, 0, 1)
 texture = SubResource("GradientTexture2D_2o6r5")
+texture_scale = 0.2
 
 [node name="StoveLight3" type="PointLight2D" parent="." unique_id=1916502014]
 position = Vector2(46, -19)
@@ -436,9 +499,9 @@ texture_scale = 0.2
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1403980668]
 z_index = -10
-position = Vector2(652.00006, 613)
-scale = Vector2(1.0101088, 0.9987736)
-texture = ExtResource("12_k3n1d")
+position = Vector2(653, 601)
+scale = Vector2(1.0145334, 0.97888356)
+texture = ExtResource("13_2o6r5")
 
 [connection signal="pressed" from="GameManager/SaltButton" to="GameManager" method="_on_salt_button_pressed"]
 [connection signal="pressed" from="GameManager/SugarButton" to="GameManager" method="_on_sugar_button_pressed"]
@@ -449,3 +512,4 @@ texture = ExtResource("12_k3n1d")
 [connection signal="pressed" from="GameManager/OnionButton" to="GameManager" method="_on_onion_button_pressed"]
 [connection signal="pressed" from="GameManager/MatchaButton" to="GameManager" method="_on_matcha_button_pressed"]
 [connection signal="pressed" from="GameManager/ServeButton" to="GameManager" method="_on_serve_button_pressed"]
+[connection signal="pressed" from="GameManager/RestartButton" to="GameManager" method="_on_restart_button_pressed"]
