@@ -68,6 +68,8 @@ func collect_ingredient(ingredient_name: String) -> void:
 	_check_all_collected()
 
 func buy_ingredient(ingredient_name: String, amount: int = 1) -> void:
+	print("buy_ingredient called with: ", ingredient_name)
+
 	if not shop_stock.has(ingredient_name):
 		print("Item not sold here: ", ingredient_name)
 		return

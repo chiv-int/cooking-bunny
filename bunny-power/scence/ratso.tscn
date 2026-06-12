@@ -59,7 +59,7 @@ metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 script = ExtResource("7_mdi34")
 target_path = NodePath("/root/QuestManager")
 function_name = "buy_ingredient"
-function_arguments = ["garlic"]
+function_arguments = ["onion"]
 metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 
 [sub_resource type="Resource" id="Resource_3jwoy"]
@@ -116,8 +116,8 @@ metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 [sub_resource type="Resource" id="Resource_l3rvn"]
 script = ExtResource("7_mdi34")
 target_path = NodePath("/root/QuestManager")
-function_name = "buy_ingredient "
-function_arguments = ["chili "]
+function_name = "buy_ingredient"
+function_arguments = ["chili"]
 metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 
 [sub_resource type="Resource" id="Resource_nwf8h"]
@@ -133,6 +133,11 @@ text = "Anything else?"
 choice_text = Array[String](["garlic ", "onion", "chili", "nothing , thank "])
 choice_function_call = Array[ExtResource("7_mdi34")]([SubResource("Resource_b7e2p"), SubResource("Resource_mn7iq"), SubResource("Resource_l3rvn"), SubResource("Resource_nwf8h")])
 metadata/_custom_type_script = "uid://ctqytvgvtrtyq"
+
+[sub_resource type="Resource" id="Resource_roi7w"]
+script = ExtResource("5_mdi34")
+text = "here you go"
+metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_20fl3"]
 script = ExtResource("7_mdi34")
@@ -159,7 +164,7 @@ polygon = PackedVector2Array(-3.4133332, -6.0153847, -3.4133332, 3.4000006, 4.90
 
 [node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("3_wbs3o")]
 dialogue = Array[ExtResource("4_tm874")]([SubResource("Resource_t6hwe"), SubResource("Resource_erdx7"), SubResource("Resource_4yxm4"), SubResource("Resource_n8vgc"), SubResource("Resource_5vkgt"), SubResource("Resource_ywjjv")])
-loop_dialogue = Array[ExtResource("4_tm874")]([SubResource("Resource_87e1r"), SubResource("Resource_mt5g0"), SubResource("Resource_20fl3")])
+loop_dialogue = Array[ExtResource("4_tm874")]([SubResource("Resource_87e1r"), SubResource("Resource_mt5g0"), SubResource("Resource_roi7w"), SubResource("Resource_20fl3")])
 is_shop = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=319163821]

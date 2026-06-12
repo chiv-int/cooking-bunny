@@ -94,6 +94,7 @@ func _activate_loop_dialogue() -> void:
 	if !player_node:
 		print(\"no player node!\")
 		return
+		
 	if active_dialogue and is_instance_valid(active_dialogue):
 		print(\"active dialogue still exists, blocked!\")
 		return
@@ -112,6 +113,7 @@ func end_shop() -> void:
 		player_node.can_move = true
 	has_introduced = false
 	if active_dialogue and is_instance_valid(active_dialogue):
+		active_dialogue.set_process(false)
 		active_dialogue.queue_free()
 		active_dialogue = null
 
