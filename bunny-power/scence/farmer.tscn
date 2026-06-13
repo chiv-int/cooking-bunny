@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://c220gxd0d7na7" path="res://script/DialogueExportResource.gd" id="4_3atd1"]
 [ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://script/DialogueTextResource.gd" id="5_1nphi"]
 [ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_2peuj"]
+[ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_i6bhh"]
+[ext_resource type="PackedScene" uid="uid://n7qmb1u4cxw4" path="res://scence/typing_box.tscn" id="7_u10sy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("2_d4c0g")
@@ -29,68 +31,49 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_00jdh"]
+[sub_resource type="Resource" id="Resource_i6bhh"]
 script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
 text = "Hello bunbun!!!"
 text_speed = 20.0
 
-[sub_resource type="Resource" id="Resource_1e6yi"]
-script = ExtResource("5_1nphi")
-speaker_img = ExtResource("6_2peuj")
-speaker_img_Hframes = 3
-text = "what's uppppppppp"
-text_speed = 20.0
-
-[sub_resource type="Resource" id="Resource_o0qch"]
-script = ExtResource("5_1nphi")
-speaker_img_Hframes = 0
-text = "hello cousin !"
-metadata/_custom_type_script = "uid://cjh8x11glubm3"
-
-[sub_resource type="Resource" id="Resource_u10sy"]
-script = ExtResource("5_1nphi")
-text = "i want to buy some potato from you!"
-metadata/_custom_type_script = "uid://cjh8x11glubm3"
-
-[sub_resource type="Resource" id="Resource_i6bhh"]
-script = ExtResource("5_1nphi")
-text = "will that we alright? "
-metadata/_custom_type_script = "uid://cjh8x11glubm3"
-
 [sub_resource type="Resource" id="Resource_3atd1"]
 script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
-text = "hey not so fast, you don;'t need to pay me "
-metadata/_custom_type_script = "uid://cjh8x11glubm3"
+text = "
+long time no see!!!"
+text_speed = 20.0
 
 [sub_resource type="Resource" id="Resource_1nphi"]
 script = ExtResource("5_1nphi")
-speaker_img = ExtResource("6_2peuj")
-speaker_img_Hframes = 3
-text = "BUT"
+text = "i want to buy vegetable from you!"
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_2peuj"]
 script = ExtResource("5_1nphi")
-speaker_img = ExtResource("6_2peuj")
-speaker_img_Hframes = 3
-text = "you need to answer my question first!!"
+text = "will that we alright? "
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_p57ny"]
 script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
-text = "hence you will get the potatos "
+text = "okay waht do you want?"
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
+
+[sub_resource type="Resource" id="Resource_wexsl"]
+script = ExtResource("7_i6bhh")
+target_path = NodePath("farmer")
+function_name = "open_typing_box"
+hide_dialogue_box = true
+metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6srt"]
 size = Vector2(77, 50)
 
-[node name="npc" type="CharacterBody2D" unique_id=1509032494]
+[node name="farmer" type="CharacterBody2D" unique_id=1509032494]
 script = ExtResource("1_fkmfs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2099000930]
@@ -103,10 +86,13 @@ position = Vector2(3.5000021, 0.8676448)
 scale = Vector2(2.34375, 1.9117645)
 polygon = PackedVector2Array(0, -10, -6, 0, 0, 7, 6, 0)
 
-[node name="DialogueArea2D" parent="." unique_id=245040315 instance=ExtResource("3_i6bhh")]
-dialogue = Array[ExtResource("4_3atd1")]([SubResource("Resource_00jdh"), SubResource("Resource_1e6yi"), SubResource("Resource_o0qch"), SubResource("Resource_u10sy"), SubResource("Resource_i6bhh"), SubResource("Resource_3atd1"), SubResource("Resource_1nphi"), SubResource("Resource_2peuj"), SubResource("Resource_p57ny")])
+[node name="DialogueArea2D" parent="." unique_id=245040315 groups=["farmer"] instance=ExtResource("3_i6bhh")]
+dialogue = Array[ExtResource("4_3atd1")]([SubResource("Resource_i6bhh"), SubResource("Resource_3atd1"), SubResource("Resource_1nphi"), SubResource("Resource_2peuj"), SubResource("Resource_p57ny"), SubResource("Resource_wexsl")])
+is_farmer = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1911373962]
 position = Vector2(8, -3)
 shape = SubResource("RectangleShape2D_w6srt")
 debug_color = Color(0.06660176, 0.61116356, 0.6197947, 0.41960785)
+
+[node name="TypingBox" parent="DialogueArea2D" unique_id=55175857 instance=ExtResource("7_u10sy")]

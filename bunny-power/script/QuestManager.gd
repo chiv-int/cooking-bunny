@@ -14,6 +14,7 @@ enum QuestState {
 
 var current_state: QuestState = QuestState.NOT_STARTED
 var came_from_house: bool = false
+var last_wrong_ingredient: String = ""
 
 var inventory: Dictionary = {
 	"carrot": 0,

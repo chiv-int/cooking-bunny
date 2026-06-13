@@ -32,6 +32,7 @@ func _process(_delta: float) -> void:
 		player_node.can_move = true
 		queue_free()
 		return
+	
 	if next_item:
 		next_item = false
 		var i = dialogue[current_dialogue_item]
@@ -49,7 +50,10 @@ func _process(_delta: float) -> void:
 		elif i is DialogueText:
 			visible = true
 			_text_resource(i)
-			
+		elif i is DialogueText:
+			print(\">> showing DialogueText index \", current_dialogue_item)
+			visible = true
+			_text_resource(i)
 		else:
 			printerr(\"You accidentally added a DE resource!\")
 			current_dialogue_item += 1
@@ -225,8 +229,7 @@ func _text_resource(i: DialogueText) -> void:
 				get_viewport().set_input_as_handled()
 				current_dialogue_item += 1
 				next_item = true
-				
-				#set speaker name here as well!
+				return
 
 func _get_node_from_path(path: String) -> Node:
 	var node = get_node_or_null(path)
