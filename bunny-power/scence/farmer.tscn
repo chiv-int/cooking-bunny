@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_2peuj"]
 [ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_i6bhh"]
 [ext_resource type="PackedScene" uid="uid://n7qmb1u4cxw4" path="res://scence/typing_box.tscn" id="7_u10sy"]
+[ext_resource type="PackedScene" uid="uid://dtx1jxctoev78" path="res://scence/trivia_box.tscn" id="9_kdrys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("2_d4c0g")
@@ -96,3 +97,5 @@ shape = SubResource("RectangleShape2D_w6srt")
 debug_color = Color(0.06660176, 0.61116356, 0.6197947, 0.41960785)
 
 [node name="TypingBox" parent="DialogueArea2D" unique_id=55175857 instance=ExtResource("7_u10sy")]
+
+[node name="TriviaBox" parent="DialogueArea2D" unique_id=1167162090 instance=ExtResource("9_kdrys")]

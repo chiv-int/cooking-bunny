@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://dtx1jxctoev78"]
+
+[ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="2_4mfa4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjkqb"]
+bg_color = Color(0.004019165, 0.004019165, 0.004019165, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="GDScript" id="GDScript_yiujq"]
+resource_name = "trivia_box.gd"
+script/source = "extends Control
+
+signal answer_correct
+signal answer_wrong
+
+@onready var question_label: Label = $VBoxContainer/QuestionLable
+@onready var button_container: VBoxContainer = $VBoxContainer/ButtonContainer
+
+var correct_index: int = -1
+
+func _ready() -> void:
+	visible = false
+
+func open_trivia(question_text: String, answers: Array, correct: int) -> void:
+	visible = true
+	question_label.text = question_text
+	correct_index = correct
+
+	# clear any old buttons
+	for child in button_container.get_children():
+		child.queue_free()
+
+	# build a button per answer
+	for i in answers.size():
+		var btn = Button.new()
+		btn.text = answers[i]
+		btn.pressed.connect(_on_answer_pressed.bind(i))
+		button_container.add_child(btn)
+
+	# focus the first button so keyboard/controller can navigate
+	await get_tree().process_frame
+	if button_container.get_child_count() > 0:
+		button_container.get_child(0).grab_focus()
+
+	print(\"trivia opened: \", question_text)
+
+func close_trivia() -> void:
+	visible = false
+	for child in button_container.get_children():
+		child.queue_free()
+
+func _on_answer_pressed(index: int) -> void:
+	print(\"answer pressed: \", index, \" | correct is: \", correct_index)
+	if index == correct_index:
+		emit_signal(\"answer_correct\")
+	else:
+		emit_signal(\"answer_wrong\")
+"
+
+[node name="TriviaBox" type="CanvasLayer" unique_id=55175857]
+
+[node name="Panel" type="Panel" parent="." unique_id=323736719 groups=["trivia_box"]]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -288.5
+offset_top = -110.0
+offset_right = 288.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yjkqb")
+script = SubResource("GDScript_yiujq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=272145653]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 565.0
+offset_bottom = 100.0
+
+[node name="QuestionLable" type="Label" parent="Panel/VBoxContainer" unique_id=1121135268]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4mfa4")
+theme_override_font_sizes/font_size = 23
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=1192399529]
+layout_mode = 2

@@ -17,6 +17,8 @@ const DialogueSystemPreload = preload("res://scence/dialogue_system.tscn")
 var dialogue_top_pos: Vector2 = Vector2(160, 48)
 var dialogue_bottom_pos: Vector2 = Vector2(160, 192)
 
+var trivia_active: bool = false
+var trivia_box: Control = null
 var player_body_in: bool = false
 var has_activated_already: bool = false
 var player_node: CharacterBody2D = null
@@ -28,31 +30,161 @@ var typing_box_active: bool = false
 
 func _ready() -> void:
 	_find_player()
-	print("READY on ", get_path(), " | is_farmer = ", is_farmer)
 	if is_farmer:
 		var boxes = get_tree().get_nodes_in_group("typing_box")
 		if boxes.size() > 0:
 			typing_box = boxes[0]
 			typing_box.correct_ingredient.connect(_on_correct_ingredient)
 			typing_box.wrong_ingredient.connect(_on_wrong_ingredient)
+			typing_box.all_ingredients_typed.connect(_on_all_ingredients_typed)
 			print("typing_box connected: ", typing_box)
+			
+		
+		var trivia_boxes = get_tree().get_nodes_in_group("trivia_box")
+		print("trivia_box group search found: ", trivia_boxes.size(), " nodes")
+		if trivia_boxes.size() > 0:
+			trivia_box = trivia_boxes[0]
+			trivia_box.answer_correct.connect(_on_trivia_correct)
+			trivia_box.answer_wrong.connect(_on_trivia_wrong)
+			print("trivia_box connected: ", trivia_box)
+
+func _ask_next_trivia() -> void:
+	if trivia_ingredients.is_empty():
+		print("All trivia complete!")
+		trivia_box.close_trivia()
+		trivia_active = false
+		player_node.can_move = true
+		return
+
+	trivia_active = true
+	current_trivia_ingredient = trivia_ingredients[0]
+	_show_random_question(current_trivia_ingredient)
+
+func _show_random_question(ingredient: String) -> void:
+	var questions = trivia_questions[ingredient]
+	current_question_index = randi() % questions.size()
+	var q = questions[current_question_index]
+
+	# shuffle answer order so the correct one isn't always first
+	var answers = q["answers"].duplicate()
+	var correct_text = answers[q["correct"]]
+	answers.shuffle()
+	var new_correct_index = answers.find(correct_text)
+
+	print("Asking about ", ingredient, ": ", q["question"])
+	trivia_box.open_trivia(q["question"], answers, new_correct_index)
+
+
+
+func _on_trivia_correct() -> void:
+	print("TRIVIA CORRECT for ", current_trivia_ingredient)
+	# give x4 of this ingredient
+	for n in 4:
+		QuestManager.collect_ingredient(current_trivia_ingredient)
+	print("Gave 4x ", current_trivia_ingredient)
+
+	# remove it from the list and move to the next
+	trivia_ingredients.remove_at(0)
+	_ask_next_trivia()
+
+func _on_trivia_wrong() -> void:
+	print("TRIVIA WRONG for ", current_trivia_ingredient)
+	# show a DIFFERENT random question for the same ingredient
+	_show_random_question(current_trivia_ingredient)
 
 func _on_correct_ingredient(ingredient_name: String) -> void:
 	print("Correct! Player typed: ", ingredient_name)
-	typing_box.close_typing_box()
-	typing_box_active = false
-	player_node.can_move = true
-	QuestManager.collect_ingredient(ingredient_name)
-	QuestManager.collect_ingredient(ingredient_name)
-	QuestManager.collect_ingredient(ingredient_name)
-	QuestManager.collect_ingredient(ingredient_name)
-	print("Gave 4x ", ingredient_name)
+	# don't close, unlock, or reward yet - more prompts coming
+	# the box itself advances to the next prompt (2/3, 3/3)
+	# reward happens in _on_all_ingredients_typed after all 3
 
 func _on_wrong_ingredient(typed_text: String) -> void:
 	print("Wrong! Player typed: ", typed_text)
 	QuestManager.last_wrong_ingredient = typed_text
+	# stay locked and keep box open so player can retry this same slot
+
+var trivia_ingredients: Array = []   # the 2 left for trivia (add near your other vars at top)
+
+var trivia_questions: Dictionary = {
+	"carrot": [
+		{
+			"question": "What vitamin are carrots best known for providing?",
+			"answers": ["Vitamin A", "Vitamin C", "Vitamin D"],
+			"correct": 0
+		},
+		{
+			"question": "Which country is the world's largest producer of carrots?",
+			"answers": ["China", "Brazil", "Canada"],
+			"correct": 0
+		},
+		{
+			"question": "Carrots grow as which part of the plant?",
+			"answers": ["Root", "Leaf", "Flower"],
+			"correct": 0
+		}
+	],
+	"potato": [
+		{
+			"question": "Potatoes are originally native to which region?",
+			"answers": ["The Andes (South America)", "Ireland", "China"],
+			"correct": 0
+		},
+		{
+			"question": "Which country grows the most potatoes today?",
+			"answers": ["China", "USA", "France"],
+			"correct": 0
+		},
+		{
+			"question": "Potatoes are a good source of which nutrient?",
+			"answers": ["Potassium", "Calcium", "Iron"],
+			"correct": 0
+		}
+	],
+	"lettuce": [
+		{
+			"question": "Lettuce is made up of mostly what?",
+			"answers": ["Water", "Sugar", "Fat"],
+			"correct": 0
+		},
+		{
+			"question": "Which country produces the most lettuce?",
+			"answers": ["China", "Italy", "Mexico"],
+			"correct": 0
+		},
+		{
+			"question": "Lettuce belongs to which plant family?",
+			"answers": ["Daisy family", "Grass family", "Bean family"],
+			"correct": 0
+		}
+	]
+}
+
+var current_trivia_ingredient: String = ""
+var current_question_index: int = -1
+
+func _on_all_ingredients_typed(typed_list: Array) -> void:
+	print("All 3 typed: ", typed_list)
+	typing_box.close_typing_box()
 	typing_box_active = false
-	player_node.can_move = true
+
+	# copy so we don't mutate the original
+	var pool = typed_list.duplicate()
+
+	# pick ONE at random → give x4 immediately
+	var free_index = randi() % pool.size()
+	var free_ingredient = pool[free_index]
+	pool.remove_at(free_index)
+
+	for n in 4:
+		QuestManager.collect_ingredient(free_ingredient)
+	print("FREE BAG: gave 4x ", free_ingredient)
+
+# the remaining 2 are saved for trivia
+	trivia_ingredients = pool
+	print("Trivia needed for: ", trivia_ingredients)
+
+	# keep player locked and start trivia
+	_ask_next_trivia()
 
 func open_typing_box() -> void:
 	if typing_box_active:
@@ -77,6 +209,9 @@ func _process(_delta: float) -> void:
 		_find_player()
 		return
 	if typing_box_active:
+		player_node.can_move = false
+		return
+	if trivia_active:
 		player_node.can_move = false
 		return
 	if activate_instant:
