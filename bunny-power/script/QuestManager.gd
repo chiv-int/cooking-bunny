@@ -61,8 +61,7 @@ func start_quest() -> void:
 
 func collect_ingredient(ingredient_name: String) -> void:
 	if not inventory.has(ingredient_name):
-		print("Unknown ingredient: ", ingredient_name)
-		return
+		inventory[ingredient_name] = 0
 	inventory[ingredient_name] += 1
 	print("Collected: ", ingredient_name, " | Total: ", inventory[ingredient_name])
 	emit_signal("ingredient_collected", ingredient_name, inventory[ingredient_name])
@@ -84,11 +83,25 @@ func buy_ingredient(ingredient_name: String, amount: int = 1) -> void:
 
 func _check_all_collected() -> void:
 	for ingredient in required_amounts:
-		if inventory[ingredient] < required_amounts[ingredient]:
+		if inventory.get(ingredient, 0) < required_amounts[ingredient]:
 			return
+	if current_state == QuestState.READY_TO_COOK or current_state == QuestState.COMPLETED:
+		return
 	current_state = QuestState.READY_TO_COOK
 	emit_signal("all_ingredients_ready")
 	print("All ingredients ready! Time to cook!")
+
+# returns true if this ingredient belongs in the curry recipe
+func is_recipe_ingredient(ingredient_name: String) -> bool:
+	return required_amounts.has(ingredient_name)
+
+# returns a list of wrong ingredients the player collected (traps)
+func get_wrong_ingredients() -> Array:
+	var wrong = []
+	for ingredient in inventory:
+		if inventory[ingredient] > 0 and not required_amounts.has(ingredient):
+			wrong.append(ingredient)
+	return wrong
 
 func has_enough(ingredient_name: String) -> bool:
 	return inventory.get(ingredient_name, 0) >= required_amounts.get(ingredient_name, 1)

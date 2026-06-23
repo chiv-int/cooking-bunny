@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://ylomwhtqh2ny"]
+
+[ext_resource type="Script" uid="uid://dj4ui2qmjpk0m" path="res://script/check_list.gd" id="1_1e5gm"]
+[ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="2_li4dk"]
+[ext_resource type="Texture2D" uid="uid://b3ifimvmr6aff" path="res://sprite/book.png" id="3_c3w5x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dec41"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(15.30028, 15.30028, 15.30028, 1)
+
+[node name="CheckListUI" type="CanvasLayer" unique_id=914637263]
+
+[node name="Panel" type="Panel" parent="." unique_id=2018958638]
+anchors_preset = -1
+anchor_left = 0.1140625
+anchor_top = 0.05
+anchor_right = 0.8765625
+anchor_bottom = 0.60555553
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_dec41")
+script = ExtResource("1_1e5gm")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=822807898]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 479.0
+offset_bottom = 190.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=103543399]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_li4dk")
+theme_override_font_sizes/font_size = 22
+text = "Shopping List"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer" unique_id=69460644]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer" unique_id=1473662690]
+layout_mode = 2
+
+[node name="BookIcon" type="TextureRect" parent="." unique_id=562831568]
+offset_left = 17.0
+offset_top = 20.0
+offset_right = 49.0
+offset_bottom = 52.0
+size_flags_vertical = 8
+texture = ExtResource("3_c3w5x")
+expand_mode = 1
