@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://xnbcexmn5xh2" path="res://script/pickup_popup.gd" id="1_3hg7k"]
 [ext_resource type="Texture2D" uid="uid://prw614ryc4xo" path="res://sprite/carrot.png" id="2_wy1dx"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="3_ny4ki"]
+[ext_resource type="AudioStream" uid="uid://dfuo7oxceefnd" path="res://fx/ping.mp3" id="4_wy1dx"]
 
 [node name="PickupPopup" type="Node2D" unique_id=1966366796]
 script = ExtResource("1_3hg7k")
@@ -19,3 +20,6 @@ offset_bottom = 9.0
 theme_override_fonts/font = ExtResource("3_ny4ki")
 theme_override_font_sizes/font_size = 14
 text = "x1"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1831598600]
+stream = ExtResource("4_wy1dx")
