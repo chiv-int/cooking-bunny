@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://c3dlugcwgdadb" path="res://tile/kitchen/curry paste-96d4.png" id="9_70uel"]
 [ext_resource type="Texture2D" uid="uid://dv6kg0mvoafbx" path="res://tile/kitchen/matchafrfinal.png" id="12_2o6r5"]
 [ext_resource type="Texture2D" uid="uid://dl8rmeabuumx" path="res://tile/kitchen/Kitchen.png" id="13_2o6r5"]
+[ext_resource type="Texture2D" uid="uid://m4u2sqaruyuq" path="res://tile/kitchen/carrot_4.png" id="14_udxuc"]
+[ext_resource type="Texture2D" uid="uid://fs41jtv3gggq" path="res://tile/kitchen/curry_paste4.png" id="15_ikiii"]
+[ext_resource type="Texture2D" uid="uid://dktaqjk71voep" path="res://tile/kitchen/milk2.png" id="16_cbp6q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj7yv"]
 atlas = ExtResource("1_f3sb7")
@@ -220,6 +223,17 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_70uel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ioo17")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k3n1d"]
 load_path = "res://.godot/imported/soup.png-02f6bd31c17c1466a7707c4d3c81a525.ctex"
 
@@ -233,6 +247,26 @@ gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 4.0
 color = Color(0.98, 0.98, 0.98, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hiqwa"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 17.0
+initial_velocity_min = 40.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2u3nc"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 18.0
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
 
 [sub_resource type="Gradient" id="Gradient_70uel"]
 
@@ -300,7 +334,7 @@ flat = true
 
 [node name="GarlicButton" type="Button" parent="GameManager" unique_id=280768085]
 offset_left = 883.0
-offset_top = 774.0
+offset_top = 746.0
 offset_right = 999.0
 offset_bottom = 843.0
 flat = true
@@ -415,11 +449,11 @@ position = Vector2(-210, 187)
 scale = Vector2(3.333, 4)
 texture = ExtResource("5_ic0uy")
 
-[node name="CarrotSprite" type="Sprite2D" parent="PotArea" unique_id=1575407237]
+[node name="CarrotSprite" type="AnimatedSprite2D" parent="PotArea" unique_id=2135153582]
 visible = false
 position = Vector2(-198, 188)
 scale = Vector2(3.299, 4)
-texture = ExtResource("5_ioo17")
+sprite_frames = SubResource("SpriteFrames_70uel")
 
 [node name="SugarSprite" type="Sprite2D" parent="PotArea" unique_id=556740242]
 visible = false
@@ -471,6 +505,34 @@ position = Vector2(216, 428)
 lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_70uel")
 
+[node name="SteamParticles2" type="GPUParticles2D" parent="PotArea" unique_id=2001600206]
+position = Vector2(160, 455)
+lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_hiqwa")
+
+[node name="SteamParticles3" type="GPUParticles2D" parent="PotArea" unique_id=408105478]
+position = Vector2(260, 460)
+lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_2u3nc")
+
+[node name="CarrotOverlay" type="Sprite2D" parent="PotArea" unique_id=311272181]
+z_index = 1
+position = Vector2(-315, 137)
+scale = Vector2(0.48276317, 0.47943038)
+texture = ExtResource("14_udxuc")
+
+[node name="CPOverlay" type="Sprite2D" parent="PotArea" unique_id=1418088805]
+z_index = 1
+position = Vector2(-297.00006, 551.00006)
+scale = Vector2(0.65859675, 0.6361338)
+texture = ExtResource("15_ikiii")
+
+[node name="MilkOverlay" type="Sprite2D" parent="PotArea" unique_id=1479400312]
+z_index = 1
+position = Vector2(-295, 356)
+scale = Vector2(0.619462, 0.676087)
+texture = ExtResource("16_cbp6q")
+
 [node name="StoveLight" type="PointLight2D" parent="." unique_id=2027435066]
 position = Vector2(526, 194)
 rotation = 0.12391838
@@ -499,7 +561,7 @@ texture_scale = 0.2
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1403980668]
 z_index = -10
-position = Vector2(653, 601)
+position = Vector2(656, 601.00006)
 scale = Vector2(1.0145334, 0.97888356)
 texture = ExtResource("13_2o6r5")
 
