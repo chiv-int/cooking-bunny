@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dlioimk7gjkgk" path="res://tile/exterior&interior/TopDownHouse_SmallItems.png" id="3_p2ky3"]
 [ext_resource type="Texture2D" uid="uid://cauofev3yeeg4" path="res://tile/exterior&interior/TopDownHouse_DoorsAndWindows.png" id="5_wtaqj"]
 [ext_resource type="Texture2D" uid="uid://dumfl2uvdcwkr" path="res://tile/exterior&interior/TopDownHouse_FurnitureState2.png" id="6_wtaqj"]
+[ext_resource type="Script" uid="uid://cre0fv6243nnr" path="res://script/door.gd" id="7_04bd5"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="7_wtaqj"]
 [ext_resource type="PackedScene" uid="uid://blicf62rcsxla" path="res://scence/grandma.tscn" id="9_tqnrm"]
 [ext_resource type="PackedScene" uid="uid://c04tdo8qxe610" path="res://scence/foxy.tscn" id="10_yfe7f"]
@@ -1521,36 +1522,6 @@ sources/1 = SubResource("TileSetAtlasSource_wtaqj")
 sources/2 = SubResource("TileSetAtlasSource_jty2q")
 sources/3 = SubResource("TileSetAtlasSource_yfe7f")
 
-[sub_resource type="GDScript" id="GDScript_wtaqj"]
-resource_name = "house_door"
-script/source = "# door.gd
-extends Area2D
-
-var player_nearby = false
-
-func _ready():
-	$Label.visible = false
-
-func _on_body_entered(body):
-	if body.is_in_group(\"player\"):
-		player_nearby = true
-		$Label.visible = true
-
-func _on_body_exited(body):
-	if body.is_in_group(\"player\"):
-		player_nearby = false
-		$Label.visible = false
-
-func _input(event):
-	if event.is_action_pressed(\"ui_accept\") and player_nearby:
-		var current = get_tree().current_scene.scene_file_path
-		if current == \"res://scence/world.tscn\":
-			get_tree().change_scene_to_file(\"res://scence/house_interior.tscn\")
-		else:
-			QuestManager.came_from_house = true 
-			get_tree().change_scene_to_file(\"res://scence/world.tscn\")
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_840go"]
 size = Vector2(20, 48)
 
@@ -1580,7 +1551,7 @@ position = Vector2(3, 242)
 
 [node name="Area2D2" type="Area2D" parent="." unique_id=905206979]
 position = Vector2(-15, 239)
-script = SubResource("GDScript_wtaqj")
+script = ExtResource("7_04bd5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=710134236]
 position = Vector2(8, 1)

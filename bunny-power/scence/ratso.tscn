@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c220gxd0d7na7" path="res://script/DialogueExportResource.gd" id="4_tm874"]
 [ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://script/DialogueTextResource.gd" id="5_mdi34"]
 [ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_5vutf"]
+[ext_resource type="AudioStream" uid="uid://t76jago8tnvx" path="res://fx/altmerchant.mp3" id="7_5vutf"]
 [ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_mdi34"]
 [ext_resource type="Script" uid="uid://ctqytvgvtrtyq" path="res://script/DialogueChoiceResource.gd" id="8_5vutf"]
 
@@ -37,15 +38,18 @@ speaker_img = ExtResource("6_5vutf")
 speaker_img_Hframes = 3
 text = "ayoooo bunbun! long time no see !"
 text_speed = 20.0
+text_sound = ExtResource("7_5vutf")
 
 [sub_resource type="Resource" id="Resource_erdx7"]
 script = ExtResource("5_mdi34")
 text = "I have fresh garlic, onion, and some spicy chili today."
+text_sound = ExtResource("7_5vutf")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_4yxm4"]
 script = ExtResource("5_mdi34")
 text = "so what chu what?"
+text_sound = ExtResource("7_5vutf")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_mdi34"]
@@ -97,6 +101,7 @@ metadata/_custom_type_script = "uid://5jue0ls6ppsw"
 [sub_resource type="Resource" id="Resource_87e1r"]
 script = ExtResource("5_mdi34")
 text = "anything else"
+text_sound = ExtResource("7_5vutf")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_b7e2p"]
@@ -137,6 +142,7 @@ metadata/_custom_type_script = "uid://ctqytvgvtrtyq"
 [sub_resource type="Resource" id="Resource_roi7w"]
 script = ExtResource("5_mdi34")
 text = "here you go"
+text_sound = ExtResource("7_5vutf")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_20fl3"]

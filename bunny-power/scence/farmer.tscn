@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cjh8x11glubm3" path="res://script/DialogueTextResource.gd" id="5_1nphi"]
 [ext_resource type="Texture2D" uid="uid://dap0xbdexj2sf" path="res://sprite/jo.png" id="6_2peuj"]
 [ext_resource type="Script" uid="uid://5jue0ls6ppsw" path="res://script/DialogueFunctionResource.gd" id="7_i6bhh"]
+[ext_resource type="AudioStream" uid="uid://db40h6hta4w4m" path="res://fx/alfarmer.mp3" id="7_r6cw5"]
 [ext_resource type="PackedScene" uid="uid://n7qmb1u4cxw4" path="res://scence/typing_box.tscn" id="7_u10sy"]
 [ext_resource type="PackedScene" uid="uid://dtx1jxctoev78" path="res://scence/trivia_box.tscn" id="9_kdrys"]
 
@@ -38,6 +39,7 @@ speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
 text = "Hello bunbun!!!"
 text_speed = 20.0
+text_sound = ExtResource("7_r6cw5")
 
 [sub_resource type="Resource" id="Resource_3atd1"]
 script = ExtResource("5_1nphi")
@@ -46,15 +48,18 @@ speaker_img_Hframes = 3
 text = "
 long time no see!!!"
 text_speed = 20.0
+text_sound = ExtResource("7_r6cw5")
 
 [sub_resource type="Resource" id="Resource_1nphi"]
 script = ExtResource("5_1nphi")
 text = "i want to buy vegetable from you!"
+text_sound = ExtResource("7_r6cw5")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_2peuj"]
 script = ExtResource("5_1nphi")
 text = "will that we alright? "
+text_sound = ExtResource("7_r6cw5")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_p57ny"]
@@ -62,6 +67,7 @@ script = ExtResource("5_1nphi")
 speaker_img = ExtResource("6_2peuj")
 speaker_img_Hframes = 3
 text = "okay waht do you want?"
+text_sound = ExtResource("7_r6cw5")
 metadata/_custom_type_script = "uid://cjh8x11glubm3"
 
 [sub_resource type="Resource" id="Resource_wexsl"]

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dfosqwtg8h0qv" path="res://tile/Garden_Planters/Garden_Planters_PlasticBucket.png" id="7_doe4o"]
 [ext_resource type="Texture2D" uid="uid://4fhkyk0t8emq" path="res://tile/Garden_Planters/Garden_Planters_RubberTire.png" id="8_0t4di"]
 [ext_resource type="Texture2D" uid="uid://vlbtc153wqtr" path="res://tile/Garden_Planters/Garden_Planters_Toilet.png" id="9_gr304"]
+[ext_resource type="Script" uid="uid://cre0fv6243nnr" path="res://script/door.gd" id="11_cinao"]
 [ext_resource type="Texture2D" uid="uid://daf2jkp5f74o4" path="res://tile/exterior&interior/House_free.png" id="12_doe4o"]
 [ext_resource type="Texture2D" uid="uid://cvbl2ogx74ir8" path="res://tile/Little Dreamyland - Free Pack/Sprites/Animals/CHICKEN/Chicken_Idle.png" id="13_cinao"]
 [ext_resource type="Texture2D" uid="uid://b8kpaxfd37d57" path="res://tile/exterior&interior/premade_buildings_demo.png" id="14_0t4di"]
@@ -2759,36 +2760,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_gr304")
 sources/3 = SubResource("TileSetAtlasSource_cinao")
 
-[sub_resource type="GDScript" id="GDScript_dtrtd"]
-resource_name = "house_door"
-script/source = "# door.gd
-extends Area2D
-
-var player_nearby = false
-
-func _ready():
-	$Label.visible = false
-
-func _on_body_entered(body):
-	if body.is_in_group(\"player\"):
-		player_nearby = true
-		$Label.visible = true
-
-func _on_body_exited(body):
-	if body.is_in_group(\"player\"):
-		player_nearby = false
-		$Label.visible = false
-
-func _input(event):
-	if event.is_action_pressed(\"ui_accept\") and player_nearby:
-		var current = get_tree().current_scene.scene_file_path
-		if current == \"res://scence/world.tscn\":
-			get_tree().change_scene_to_file(\"res://scence/house_interior.tscn\")
-		else:
-			QuestManager.came_from_house = true 
-			get_tree().change_scene_to_file(\"res://scence/world.tscn\")
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gr7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dymuu"]
@@ -4862,7 +4833,7 @@ tile_map_data = PackedByteArray("AAAkAAoAAAABAAEAAAAiAA8AAwA8AAEAAAAlAA8AAwA8AAI
 tile_set = SubResource("TileSet_14qux")
 
 [node name="Area2D" type="Area2D" parent="exte" unique_id=1211551509]
-script = SubResource("GDScript_dtrtd")
+script = ExtResource("11_cinao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exte/Area2D" unique_id=1899190559]
 position = Vector2(615.5, 220)
