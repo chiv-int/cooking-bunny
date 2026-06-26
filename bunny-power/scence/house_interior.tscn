@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://wr061dfid7ga" path="res://scence/dear.tscn" id="13_2f1ta"]
 [ext_resource type="PackedScene" uid="uid://ct5wyckqifrp0" path="res://scence/ter.tscn" id="14_04bd5"]
 [ext_resource type="PackedScene" uid="uid://b23gnup28b4gn" path="res://scence/coconut_milk.tscn" id="15_2f1ta"]
+[ext_resource type="Script" uid="uid://dash0afnqkj35" path="res://stove.gd" id="17_eb0i0"]
 
 [sub_resource type="GDScript" id="GDScript_wigdr"]
 script/source = "# house_interior.gd
@@ -23,9 +24,23 @@ extends Node2D
 
 func _ready():
 	var player = get_tree().get_first_node_in_group(\"player\")
-	var spawn = $SpawnPoint
-	if player and spawn:
-		player.global_position = spawn.global_position
+	if not player:
+		return
+	if QuestManager.came_from_kitchen:
+		var spawn = $StoveSpawn
+		if spawn:
+			player.global_position = spawn.global_position
+		QuestManager.came_from_kitchen = false
+	else:
+		var spawn = $SpawnPoint
+		if spawn:
+			player.global_position = spawn.global_position
+
+func _on_stove_area_body_entered(body: Node2D) -> void:
+	pass
+
+func _on_stove_area_body_exited(body: Node2D) -> void:
+	pass
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_840go"]
@@ -1525,6 +1540,9 @@ sources/3 = SubResource("TileSetAtlasSource_yfe7f")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_840go"]
 size = Vector2(20, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04bd5"]
+size = Vector2(98, 111.25)
+
 [node name="house interior" type="Node2D" unique_id=970086166]
 script = SubResource("GDScript_wigdr")
 
@@ -1629,7 +1647,29 @@ z_index = 1
 position = Vector2(363, 203)
 
 [node name="coconut_milk" parent="." unique_id=1185353391 instance=ExtResource("15_2f1ta")]
-position = Vector2(689, 17)
+position = Vector2(591, 30)
+
+[node name="StoveArea" type="Area2D" parent="." unique_id=120553743]
+position = Vector2(738, 15)
+script = ExtResource("17_eb0i0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoveArea" unique_id=1304225105]
+position = Vector2(-15, 2.375)
+shape = SubResource("RectangleShape2D_04bd5")
+
+[node name="Label" type="Label" parent="StoveArea" unique_id=454255882]
+offset_left = -65.0
+offset_top = -66.0
+offset_right = 33.0
+offset_bottom = -43.0
+theme_override_fonts/font = ExtResource("7_wtaqj")
+theme_override_font_sizes/font_size = 13
+text = "press Enter to Cook"
+
+[node name="StoveSpawn" type="Marker2D" parent="." unique_id=162382364]
+position = Vector2(723, 49)
 
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_body_exited"]
+[connection signal="body_entered" from="StoveArea" to="StoveArea" method="_on_body_entered"]
+[connection signal="body_exited" from="StoveArea" to="StoveArea" method="_on_body_exited"]
