@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dn3qf4pv0otom" path="res://tile/kitchen/note.png" id="2_iokrx"]
 [ext_resource type="Texture2D" uid="uid://cufxeb65fi2xd" path="res://tile/kitchen/salt-96d9.png" id="3_t56t5"]
 [ext_resource type="Texture2D" uid="uid://c4j57uglluw0g" path="res://tile/kitchen/garlic-96d6.png" id="4_jvpf2"]
-[ext_resource type="Texture2D" uid="uid://b1eufl8wpc4lp" path="res://tile/kitchen/potato-96ec.png" id="5_vi7f3"]
 [ext_resource type="Texture2D" uid="uid://dr7hqvp1rf22a" path="res://tile/kitchen/carrot-96cf.png" id="6_r8jxt"]
 [ext_resource type="Texture2D" uid="uid://qabba7ngsc4j" path="res://tile/kitchen/suger-96db.png" id="7_kel4h"]
 [ext_resource type="Texture2D" uid="uid://chm30w1yro4fu" path="res://tile/kitchen/coconut milk-96d2.png" id="8_0g2fj"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dq4nju7kgexys" path="res://tile/kitchen/matchafrfinal.png" id="12_tfngk"]
 [ext_resource type="Texture2D" uid="uid://eiui863080gp" path="res://tile/kitchen/carrot_4.png" id="13_8qk4e"]
 [ext_resource type="Texture2D" uid="uid://py3hx8fin5mq" path="res://tile/kitchen/curry_paste4.png" id="14_smuir"]
+[ext_resource type="Texture2D" uid="uid://nk048yuvm2k4" path="res://tile/kitchen/new-kitchen.jpg" id="15_627qq"]
 [ext_resource type="Texture2D" uid="uid://dewblv4rafa3h" path="res://tile/kitchen/Kitchen.png" id="15_r4juj"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="16_5ykgv"]
 
@@ -40,6 +40,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnyhw"]
+load_path = "res://.godot/imported/potato.png-dbaa76831b9bf8a47752320dcd872dc1.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_70uel"]
 animations = [{
@@ -155,7 +158,16 @@ offset_right = 975.0
 offset_bottom = 563.0
 flat = true
 
+[node name="PotatoButton" type="Button" parent="GameManager" unique_id=1302656118]
+offset_left = 601.0
+offset_top = 93.0
+offset_right = 792.0
+offset_bottom = 222.0
+text = "potato"
+flat = true
+
 [node name="MatchaButton" type="Button" parent="GameManager" unique_id=302212636]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.025
@@ -256,7 +268,8 @@ texture = ExtResource("4_jvpf2")
 visible = false
 position = Vector2(-210, 187)
 scale = Vector2(3.333, 4)
-texture = ExtResource("5_vi7f3")
+texture = SubResource("CompressedTexture2D_dnyhw")
+hframes = 4
 
 [node name="CarrotSprite" type="AnimatedSprite2D" parent="PotArea" unique_id=2135153582]
 visible = false
@@ -325,12 +338,14 @@ lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_2u3nc")
 
 [node name="CarrotOverlay" type="Sprite2D" parent="PotArea" unique_id=311272181]
+visible = false
 z_index = 1
 position = Vector2(-315, 137)
 scale = Vector2(0.48276317, 0.47943038)
 texture = ExtResource("13_8qk4e")
 
 [node name="CPOverlay" type="Sprite2D" parent="PotArea" unique_id=1418088805]
+visible = false
 z_index = 1
 position = Vector2(-297.00006, 551.00006)
 scale = Vector2(0.65859675, 0.6361338)
@@ -357,7 +372,7 @@ texture = SubResource("GradientTexture2D_2o6r5")
 texture_scale = 0.2
 
 [node name="StoveLight3" type="PointLight2D" parent="." unique_id=1916502014]
-position = Vector2(46, -19)
+position = Vector2(529, 155)
 scale = Vector2(1, 0.99999994)
 
 [node name="StoveLight4" type="PointLight2D" parent="." unique_id=477118982]
@@ -372,6 +387,11 @@ z_index = -10
 position = Vector2(656, 601.00006)
 scale = Vector2(1.0145334, 0.97888356)
 texture = ExtResource("15_r4juj")
+
+[node name="empty-kitchen" type="Sprite2D" parent="Background" unique_id=1622447567]
+position = Vector2(1.7539115, 1.1664276)
+scale = Vector2(1.2613952, 1.256215)
+texture = ExtResource("15_627qq")
 
 [node name="ExitButton" type="Button" parent="." unique_id=2089680054]
 offset_left = 28.0
@@ -403,6 +423,7 @@ zoom = Vector2(0.28, 0.28)
 [connection signal="pressed" from="GameManager/CarrotButton" to="GameManager" method="_on_carrot_button_pressed"]
 [connection signal="pressed" from="GameManager/GarlicButton" to="GameManager" method="_on_garlic_button_pressed"]
 [connection signal="pressed" from="GameManager/OnionButton" to="GameManager" method="_on_onion_button_pressed"]
+[connection signal="pressed" from="GameManager/PotatoButton" to="GameManager" method="_on_potato_button_pressed"]
 [connection signal="pressed" from="GameManager/MatchaButton" to="GameManager" method="_on_matcha_button_pressed"]
 [connection signal="pressed" from="GameManager/ServeButton" to="GameManager" method="_on_serve_button_pressed"]
 [connection signal="pressed" from="GameManager/RestartButton" to="GameManager" method="_on_restart_button_pressed"]

@@ -1,15 +1,27 @@
 extends Node
 
 const CORRECT_ORDER = [
-	"onion", "garlic", "curry_paste",
-	"carrot", "coconut_milk", "salt", "sugar"
+	"onion", "garlic", "curry_paste", "potato",
+	"carrot", "coconut_milk", "salt", "brown_sugar"
 ]
-
 const ALL_INGREDIENTS = [
-	"salt", "sugar", "curry_paste",
+	"salt", "brown_sugar", "curry_paste", "potato",
 	"coconut_milk", "carrot", "garlic", "onion"
 ]
+const BUTTON_PATHS := {
+	"salt":         "SaltButton",
+	"brown_sugar":  "SugarButton",
+	"curry_paste":  "CurryPasteButton",
+	"coconut_milk": "CoconutMilkButton",
+	"carrot":       "CarrotButton",
+	"garlic":       "GarlicButton",
+	"onion":        "OnionButton",
+	"potato":       "PotatoButton",
+}
+const PANTRY_INFINITE := ["salt", "brown_sugar"]
+const PANTRY_LIMITED  := {"curry_paste": 1}
 
+var available := {}
 var quality_score        := 0
 var stars                := 1
 var ingredients          := {}
@@ -55,6 +67,8 @@ const USE_STAR_ICONS := false
 
 # ─────────────────────────────────────────────
 func _ready() -> void:
+	_setup_availability()
+	_init_shelf_sprites()
 	_init_shelf_sprites()
 	_init_overlay_textures()
 	_reset_ingredients()
@@ -68,15 +82,53 @@ func _ready() -> void:
 	if restart_button:
 		restart_button.visible = false
 
+func _setup_availability() -> void:
+	# --- TEMP TEST INVENTORY — DELETE BEFORE FINAL SUBMISSION ---
+	QuestManager.inventory["carrot"] = 3
+	QuestManager.inventory["onion"] = 2
+	QuestManager.inventory["potato"] = 2
+	QuestManager.inventory["garlic"] = 3
+	QuestManager.inventory["coconut_milk"] = 1
+	# --- END TEMP TEST INVENTORY ---
+
+	available.clear()
+
+	# Infinite pantry staples
+	for ing in PANTRY_INFINITE:
+		available[ing] = 9999
+
+	# Limited pantry items (curry paste)
+	for ing in PANTRY_LIMITED:
+		available[ing] = PANTRY_LIMITED[ing]
+
+	# Gathered ingredients — pull count from QuestManager
+	for ing in ["onion", "garlic", "carrot", "potato", "coconut_milk"]:
+		available[ing] = QuestManager.inventory.get(ing, 0)
+		
+	var matcha_btn = get_node_or_null("MatchaButton")
+	if matcha_btn:
+		matcha_btn.visible = false
+
+	_refresh_buttons()
+
+func _refresh_buttons() -> void:
+	for ing in BUTTON_PATHS:
+		var btn = get_node_or_null(BUTTON_PATHS[ing])
+		if btn:
+			btn.visible = available.get(ing, 0) > 0
+		else:
+			print("WARNING: button not found for ", ing, " at ", BUTTON_PATHS[ing])
+
 func _init_shelf_sprites() -> void:
 	var paths := {
 		"salt":         "../PotArea/SaltSprite",
-		"sugar":        "../PotArea/SugarSprite",
+		"brown_sugar":  "../PotArea/SugarSprite",
 		"curry_paste":  "../PotArea/CurryPasteSprite",
 		"coconut_milk": "../PotArea/CoconutSprite",
 		"carrot":       "../PotArea/CarrotSprite",
 		"garlic":       "../PotArea/GarlicSprite",
 		"onion":        "../PotArea/OnionSprite",
+		"potato":       "../PotArea/PotatoeSprite",
 		"matcha":       "../PotArea/MatchaSprite"
 	}
 	for key in paths:
@@ -171,6 +223,17 @@ func _init_steam() -> void:
 #  ADD INGREDIENT
 # ─────────────────────────────────────────────
 func add_ingredient(ingredient_name: String) -> void:
+	if available.get(ingredient_name, 0) <= 0:
+		print("No ", ingredient_name, " available")
+		return
+
+	# Consume one, unless it's an infinite pantry staple
+	if ingredient_name not in PANTRY_INFINITE:
+		available[ingredient_name] -= 1
+		if available[ingredient_name] <= 0:
+			var btn = get_node_or_null(BUTTON_PATHS.get(ingredient_name, ""))
+			if btn:
+				btn.visible = false
 	ingredients[ingredient_name] += 1
 	if ingredient_name not in player_order:
 		player_order.append(ingredient_name)
@@ -356,10 +419,11 @@ func _calculate_curry_quality() -> void:
 			_: quality_score -= 1
 
 	# Heavy penalty for trap ingredients
-	for trap in TRAP_INGREDIENTS:
-		if ingredients.get(trap, 0) > 0:
-			quality_score -= TRAP_PENALTY
-			print("Trap ingredient used: ", trap, " | Penalty: -", TRAP_PENALTY)
+# Penalty for trap ingredients the player GATHERED (from QuestManager)
+	var gathered_traps = QuestManager.get_wrong_ingredients()
+	for trap in gathered_traps:
+		quality_score -= TRAP_PENALTY
+		print("Gathered trap penalised: ", trap, " | -", TRAP_PENALTY)
 
 	quality_score = max(0, quality_score)
 	_calculate_star_rating()
@@ -418,7 +482,7 @@ func _all_ingredients_added() -> bool:
 func _calculate_star_rating() -> void:
 	var all_added  := _all_ingredients_added()
 	var good_steps := _count_correct_order_steps()
-	if all_added and good_steps == 7:
+	if all_added and good_steps == 8:
 		stars = 5
 	elif all_added and good_steps >= 4:
 		stars = 4
@@ -497,12 +561,13 @@ func _shake_label(label: Label) -> void:
 #  BUTTON HANDLERS
 # ─────────────────────────────────────────────
 func _on_salt_button_pressed():         add_ingredient("salt")
-func _on_sugar_button_pressed():        add_ingredient("sugar")
+func _on_sugar_button_pressed():        add_ingredient("brown_sugar")
 func _on_curry_paste_button_pressed():  add_ingredient("curry_paste")
 func _on_coconut_milk_button_pressed(): add_ingredient("coconut_milk")
 func _on_carrot_button_pressed():       add_ingredient("carrot")
 func _on_garlic_button_pressed():       add_ingredient("garlic")
 func _on_onion_button_pressed():        add_ingredient("onion")
+func _on_potato_button_pressed():       add_ingredient("potato")
 func _on_matcha_button_pressed():       add_ingredient("matcha")
 
 func _on_restart_button_pressed() -> void:
