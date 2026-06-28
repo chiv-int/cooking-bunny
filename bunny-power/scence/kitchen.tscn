@@ -4,18 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://dn3qf4pv0otom" path="res://tile/kitchen/note.png" id="2_iokrx"]
 [ext_resource type="Texture2D" uid="uid://cufxeb65fi2xd" path="res://tile/kitchen/salt-96d9.png" id="3_t56t5"]
 [ext_resource type="Texture2D" uid="uid://c4j57uglluw0g" path="res://tile/kitchen/garlic-96d6.png" id="4_jvpf2"]
-[ext_resource type="Texture2D" uid="uid://dr7hqvp1rf22a" path="res://tile/kitchen/carrot-96cf.png" id="6_r8jxt"]
+[ext_resource type="Texture2D" uid="uid://prw614ryc4xo" path="res://sprite/carrot.png" id="5_iokrx"]
 [ext_resource type="Texture2D" uid="uid://qabba7ngsc4j" path="res://tile/kitchen/suger-96db.png" id="7_kel4h"]
-[ext_resource type="Texture2D" uid="uid://chm30w1yro4fu" path="res://tile/kitchen/coconut milk-96d2.png" id="8_0g2fj"]
 [ext_resource type="Texture2D" uid="uid://d4lapbmk2hga6" path="res://tile/kitchen/onion-96d7.png" id="9_l14m0"]
 [ext_resource type="Texture2D" uid="uid://bbibmlg70kdhc" path="res://tile/kitchen/curry paste-96d4.png" id="10_fb76f"]
-[ext_resource type="Texture2D" uid="uid://d3if6u344evwa" path="res://tile/kitchen/Pot.png" id="11_4w7dv"]
-[ext_resource type="Texture2D" uid="uid://dq4nju7kgexys" path="res://tile/kitchen/matchafrfinal.png" id="12_tfngk"]
 [ext_resource type="Texture2D" uid="uid://eiui863080gp" path="res://tile/kitchen/carrot_4.png" id="13_8qk4e"]
+[ext_resource type="Texture2D" uid="uid://dkr8uigqcym5t" path="res://tile/kitchen/basket-no-carrot.png" id="14_iokrx"]
 [ext_resource type="Texture2D" uid="uid://py3hx8fin5mq" path="res://tile/kitchen/curry_paste4.png" id="14_smuir"]
 [ext_resource type="Texture2D" uid="uid://nk048yuvm2k4" path="res://tile/kitchen/new-kitchen.jpg" id="15_627qq"]
+[ext_resource type="Texture2D" uid="uid://d1dd2sqt002c8" path="res://tile/kitchen/plate_no_onion.png" id="15_jvpf2"]
 [ext_resource type="Texture2D" uid="uid://dewblv4rafa3h" path="res://tile/kitchen/Kitchen.png" id="15_r4juj"]
 [ext_resource type="FontFile" uid="uid://cwhv4sa1jhftx" path="res://sprite/8bitoperator_jve.ttf" id="16_5ykgv"]
+[ext_resource type="Texture2D" uid="uid://cngd2cuyee1fp" path="res://tile/kitchen/plate-with-onion.png" id="16_vi7f3"]
+[ext_resource type="Texture2D" uid="uid://gn8pvr4q7vum" path="res://tile/kitchen/plate-no-garlic.png" id="17_0g2fj"]
+[ext_resource type="Texture2D" uid="uid://cba36m4vudp6" path="res://tile/kitchen/plate-with-garlic.png" id="18_l14m0"]
+[ext_resource type="Texture2D" uid="uid://dqsufw1lqg4ol" path="res://tile/kitchen/tray-no-curry-paste.png" id="19_4w7dv"]
+[ext_resource type="Texture2D" uid="uid://cq7ihba2s4kc4" path="res://tile/kitchen/basket-no-potato.png" id="19_fb76f"]
+[ext_resource type="Texture2D" uid="uid://baemjjtdd84vt" path="res://tile/kitchen/basket-with-potato.png" id="20_4w7dv"]
+[ext_resource type="Texture2D" uid="uid://dlwg4pxmcp3qr" path="res://tile/kitchen/tray-with-curry-paste.png" id="20_tfngk"]
+[ext_resource type="Texture2D" uid="uid://cnt3il1aacrxi" path="res://tile/kitchen/coconut-milk.png" id="21_8qk4e"]
+[ext_resource type="Texture2D" uid="uid://bhvgjqbcy5h17" path="res://tile/kitchen/string-no-chili.png" id="22_smuir"]
+[ext_resource type="Texture2D" uid="uid://diya7xxcxft3m" path="res://tile/kitchen/string-with-chili.png" id="23_r4juj"]
+[ext_resource type="Texture2D" uid="uid://d3037c7rs3jj4" path="res://tile/kitchen/basket-no-lettuce.png" id="26_vgf5r"]
+[ext_resource type="Texture2D" uid="uid://bias4rvvtco18" path="res://tile/kitchen/basket-with-lettuce.png" id="27_ddesb"]
 
 [sub_resource type="SystemFont" id="SystemFont_2o6r5"]
 font_weight = 600
@@ -44,16 +55,36 @@ corner_radius_bottom_left = 12
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnyhw"]
 load_path = "res://.godot/imported/potato.png-dbaa76831b9bf8a47752320dcd872dc1.ctex"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t56t5"]
+atlas = ExtResource("5_iokrx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvpf2"]
+atlas = ExtResource("5_iokrx")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_70uel"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_r8jxt")
+"texture": SubResource("AtlasTexture_t56t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvpf2")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tfngk"]
+load_path = "res://.godot/imported/chili.png-e96e7818f0274ccc82ed112e6ced1cb0.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qk4e"]
+load_path = "res://.godot/imported/coconut milk-96d2.png-411305f8f9f0555bd3277bb296ac64f2.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_smuir"]
+load_path = "res://.godot/imported/lettuce.png-43cb490412aca0730b209dc257e04390.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k3n1d"]
 load_path = "res://.godot/imported/soup.png-02f6bd31c17c1466a7707c4d3c81a525.ctex"
@@ -89,20 +120,8 @@ gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 4.0
 
-[sub_resource type="Gradient" id="Gradient_70uel"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hiqwa"]
-gradient = SubResource("Gradient_70uel")
-
-[sub_resource type="Gradient" id="Gradient_k3n1d"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2o6r5"]
-gradient = SubResource("Gradient_k3n1d")
-
-[sub_resource type="Gradient" id="Gradient_2o6r5"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_70uel"]
-gradient = SubResource("Gradient_2o6r5")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t56t5"]
+load_path = "res://.godot/imported/basket-with-carrot.png-90498740afe8046caec29b86de4ebc11.ctex"
 
 [node name="kitchen" type="Node2D" unique_id=1157158312]
 
@@ -110,74 +129,74 @@ gradient = SubResource("Gradient_2o6r5")
 script = ExtResource("1_627qq")
 
 [node name="SaltButton" type="Button" parent="GameManager" unique_id=542628737]
-offset_left = 587.0
-offset_top = 205.0
+offset_left = 597.0
+offset_top = 224.0
 offset_right = 677.0
-offset_bottom = 319.0
+offset_bottom = 338.0
 flat = true
 
 [node name="SugarButton" type="Button" parent="GameManager" unique_id=2105896402]
-offset_left = 686.0
-offset_top = 206.0
-offset_right = 769.0
-offset_bottom = 325.0
+offset_left = 710.0
+offset_top = 230.0
+offset_right = 783.0
+offset_bottom = 337.0
 flat = true
 
 [node name="CurryPasteButton" type="Button" parent="GameManager" unique_id=1800264646]
-offset_left = 66.0
-offset_top = 621.0
-offset_right = 253.0
-offset_bottom = 806.0
+offset_left = 321.0
+offset_top = 524.0
+offset_right = 443.0
+offset_bottom = 639.0
 flat = true
 
 [node name="CoconutMilkButton" type="Button" parent="GameManager" unique_id=307171170]
-offset_left = 79.0
-offset_top = 424.0
-offset_right = 267.0
-offset_bottom = 576.0
+offset_left = 819.0
+offset_top = 167.0
+offset_right = 907.0
+offset_bottom = 341.0
 flat = true
 
 [node name="CarrotButton" type="Button" parent="GameManager" unique_id=1244431271]
-offset_left = 33.0
-offset_top = 217.0
-offset_right = 250.0
-offset_bottom = 327.0
+offset_left = 58.0
+offset_top = 354.0
+offset_right = 248.0
+offset_bottom = 484.0
 flat = true
 
 [node name="GarlicButton" type="Button" parent="GameManager" unique_id=280768085]
-offset_left = 883.0
-offset_top = 746.0
-offset_right = 999.0
-offset_bottom = 843.0
+offset_left = 1137.0
+offset_top = 664.0
+offset_right = 1231.0
+offset_bottom = 774.0
 flat = true
 
 [node name="OnionButton" type="Button" parent="GameManager" unique_id=549607631]
-offset_left = 852.0
-offset_top = 451.0
-offset_right = 975.0
-offset_bottom = 563.0
+offset_left = 929.0
+offset_top = 675.0
+offset_right = 1040.0
+offset_bottom = 773.0
 flat = true
 
 [node name="PotatoButton" type="Button" parent="GameManager" unique_id=1302656118]
-offset_left = 601.0
-offset_top = 93.0
-offset_right = 792.0
-offset_bottom = 222.0
-text = "potato"
+offset_left = 81.0
+offset_top = 595.0
+offset_right = 224.0
+offset_bottom = 694.0
 flat = true
 
-[node name="MatchaButton" type="Button" parent="GameManager" unique_id=302212636]
-visible = false
-modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
-anchor_left = 0.025
-anchor_top = -0.020000001
-anchor_right = 0.025
-anchor_bottom = -0.020000001
-offset_left = 1000.5
-offset_top = 476.0
-offset_right = 1244.5
-offset_bottom = 665.0
+[node name="ChiliButton" type="Button" parent="GameManager" unique_id=462743542]
+offset_left = 1009.0
+offset_top = 66.0
+offset_right = 1103.0
+offset_bottom = 426.0
+flat = true
+
+[node name="LettuceButton" type="Button" parent="GameManager" unique_id=898417908]
+offset_left = 980.0
+offset_top = 510.0
+offset_right = 1180.0
+offset_bottom = 614.0
+flat = true
 
 [node name="ServeButton" type="Button" parent="GameManager" unique_id=1714338496]
 offset_left = 576.0
@@ -251,54 +270,87 @@ text = "Cook Again"
 [node name="PotArea" type="Node2D" parent="." unique_id=793411110]
 position = Vector2(462, 133)
 
+[node name="PotSprite" type="Sprite2D" parent="PotArea" unique_id=920567498]
+position = Vector2(218, 466)
+offset = Vector2(-218, -466)
+
 [node name="SaltSprite" type="Sprite2D" parent="PotArea" unique_id=768325907]
 visible = false
-position = Vector2(-101, 184.74998)
-scale = Vector2(3.439, 4)
+z_index = 1
+position = Vector2(177.52176, 78.00001)
+scale = Vector2(3.9729512, 3.875147)
 skew = 0.008726646
 texture = ExtResource("3_t56t5")
+hframes = 4
 
 [node name="GarlicSprite" type="Sprite2D" parent="PotArea" unique_id=450258148]
 visible = false
-position = Vector2(-155, 156)
-scale = Vector2(4.97, 4)
+z_index = 1
+position = Vector2(728, 491)
+scale = Vector2(5.2499886, 4.624998)
 texture = ExtResource("4_jvpf2")
+hframes = 2
 
 [node name="PotatoeSprite" type="Sprite2D" parent="PotArea" unique_id=23723854]
 visible = false
-position = Vector2(-210, 187)
-scale = Vector2(3.333, 4)
+z_index = 1
+position = Vector2(-303.5, 443)
+scale = Vector2(4.9375005, 4.624999)
 texture = SubResource("CompressedTexture2D_dnyhw")
 hframes = 4
 
 [node name="CarrotSprite" type="AnimatedSprite2D" parent="PotArea" unique_id=2135153582]
 visible = false
-position = Vector2(-198, 188)
-scale = Vector2(3.299, 4)
+z_index = 1
+position = Vector2(-262.5, 184.50002)
+scale = Vector2(6.312501, 5.5625005)
 sprite_frames = SubResource("SpriteFrames_70uel")
+frame_progress = 0.9408431
 
 [node name="SugarSprite" type="Sprite2D" parent="PotArea" unique_id=556740242]
 visible = false
-position = Vector2(-119, 186)
-scale = Vector2(4, 4)
+z_index = 1
+position = Vector2(282.00003, 71.5)
+scale = Vector2(4.999999, 4.1874995)
 texture = ExtResource("7_kel4h")
+hframes = 4
+
+[node name="ChiliSprite" type="Sprite2D" parent="PotArea" unique_id=796231621]
+visible = false
+z_index = 1
+position = Vector2(615.00006, 116)
+scale = Vector2(0.3399434, 0.3172805)
+texture = SubResource("CompressedTexture2D_tfngk")
+hframes = 2
 
 [node name="CoconutSprite" type="Sprite2D" parent="PotArea" unique_id=812766788]
 visible = false
-position = Vector2(-159, 154)
-scale = Vector2(4, 4)
-texture = ExtResource("8_0g2fj")
+z_index = 1
+position = Vector2(407, 9.999999)
+scale = Vector2(3.8124998, 3.6875)
+texture = SubResource("CompressedTexture2D_8qk4e")
 hframes = 2
+
+[node name="LettuceSprite" type="Sprite2D" parent="PotArea" unique_id=551375072]
+visible = false
+z_index = 1
+position = Vector2(622.5, 392.00006)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("CompressedTexture2D_smuir")
 
 [node name="OnionSprite" type="Sprite2D" parent="PotArea" unique_id=1095209283]
 visible = false
-position = Vector2(-112.5, 175)
-scale = Vector2(3.699, 4)
+z_index = 1
+position = Vector2(530.99994, 506.5)
+scale = Vector2(5.500001, 5.1875014)
 texture = ExtResource("9_l14m0")
+hframes = 2
 
 [node name="CurryPasteSprite" type="Sprite2D" parent="PotArea" unique_id=471061252]
 visible = false
-scale = Vector2(4, 4)
+z_index = 1
+position = Vector2(-84.99999, 317)
+scale = Vector2(2.8125005, 3.1249995)
 texture = ExtResource("10_fb76f")
 hframes = 4
 
@@ -309,18 +361,6 @@ z_index = 1
 position = Vector2(211.99994, 520)
 scale = Vector2(0.62730604, 0.6327947)
 texture = SubResource("CompressedTexture2D_k3n1d")
-
-[node name="PotSprite" type="Sprite2D" parent="PotArea" unique_id=35413124]
-visible = false
-position = Vector2(210.99998, 494)
-scale = Vector2(0.45398766, 0.38297877)
-texture = ExtResource("11_4w7dv")
-
-[node name="MatchaSprite" type="Sprite2D" parent="PotArea" unique_id=876638579]
-visible = false
-modulate = Color(1, 1, 1, 0.39215687)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("12_tfngk")
 
 [node name="SteamParticles" type="GPUParticles2D" parent="PotArea" unique_id=791251976]
 position = Vector2(216, 428)
@@ -352,35 +392,91 @@ scale = Vector2(0.65859675, 0.6361338)
 texture = ExtResource("14_smuir")
 
 [node name="MilkOverlay" type="Sprite2D" parent="PotArea" unique_id=1479400312]
+visible = false
 z_index = 1
 position = Vector2(-295, 356)
 scale = Vector2(0.619462, 0.676087)
 
-[node name="StoveLight" type="PointLight2D" parent="." unique_id=2027435066]
-position = Vector2(526, 194)
-rotation = 0.12391838
-scale = Vector2(7.722357, 4.3802075)
-color = Color(1, 0.41568628, 0, 1)
-texture = SubResource("GradientTexture2D_hiqwa")
-texture_scale = 0.2
+[node name="CarrotEmpty" type="Sprite2D" parent="PotArea" unique_id=320187929]
+visible = false
+position = Vector2(-311, 309)
+scale = Vector2(0.7026627, 0.7208672)
+texture = ExtResource("14_iokrx")
 
-[node name="StoveLight2" type="PointLight2D" parent="." unique_id=980998608]
-position = Vector2(458.5, 153.5)
-scale = Vector2(1.7968748, 1.7968745)
-color = Color(1, 0.41568628, 0, 1)
-texture = SubResource("GradientTexture2D_2o6r5")
-texture_scale = 0.2
+[node name="CarrotFull" type="Sprite2D" parent="PotArea" unique_id=1285063567]
+position = Vector2(-311, 309.5)
+scale = Vector2(0.69230765, 0.71815723)
+texture = SubResource("CompressedTexture2D_t56t5")
 
-[node name="StoveLight3" type="PointLight2D" parent="." unique_id=1916502014]
-position = Vector2(529, 155)
-scale = Vector2(1, 0.99999994)
+[node name="OnionEmpty" type="Sprite2D" parent="PotArea" unique_id=698339543]
+visible = false
+position = Vector2(537, 606)
+scale = Vector2(0.35616446, 0.3278689)
+texture = ExtResource("15_jvpf2")
 
-[node name="StoveLight4" type="PointLight2D" parent="." unique_id=477118982]
-position = Vector2(461.5, 193)
-scale = Vector2(1.6406252, 1.5625001)
-color = Color(1, 0.41568628, 0, 1)
-texture = SubResource("GradientTexture2D_70uel")
-texture_scale = 0.2
+[node name="OnionFull" type="Sprite2D" parent="PotArea" unique_id=1649097447]
+position = Vector2(536.99994, 605)
+scale = Vector2(0.35322896, 0.3237705)
+texture = ExtResource("16_vi7f3")
+
+[node name="GarlicEmpty" type="Sprite2D" parent="PotArea" unique_id=549650357]
+visible = false
+position = Vector2(721.00006, 598)
+scale = Vector2(0.38076368, 0.4958218)
+texture = ExtResource("17_0g2fj")
+
+[node name="GarlicFull" type="Sprite2D" parent="PotArea" unique_id=268625716]
+position = Vector2(722.5, 598)
+scale = Vector2(0.39337173, 0.5013927)
+texture = ExtResource("18_l14m0")
+
+[node name="PotatoEmpty" type="Sprite2D" parent="PotArea" unique_id=1759422912]
+visible = false
+position = Vector2(-311.5, 518.625)
+scale = Vector2(0.54041916, 0.5971849)
+texture = ExtResource("19_fb76f")
+
+[node name="PotatoFull" type="Sprite2D" parent="PotArea" unique_id=1907292848]
+position = Vector2(-310.5, 519)
+scale = Vector2(0.5523953, 0.5951744)
+texture = ExtResource("20_4w7dv")
+
+[node name="CurryPasteEmpty" type="Sprite2D" parent="PotArea" unique_id=1373592388]
+visible = false
+position = Vector2(-82, 451)
+scale = Vector2(0.56250006, 0.53798777)
+texture = ExtResource("19_4w7dv")
+
+[node name="CurryPasteFull" type="Sprite2D" parent="PotArea" unique_id=1055650826]
+position = Vector2(-83, 450)
+scale = Vector2(0.56347656, 0.5405544)
+texture = ExtResource("20_tfngk")
+
+[node name="CoconutMilk" type="Sprite2D" parent="PotArea" unique_id=2091577170]
+position = Vector2(401.25003, 132.875)
+scale = Vector2(0.30847964, 0.3096708)
+texture = ExtResource("21_8qk4e")
+
+[node name="ChiliEmpty" type="Sprite2D" parent="PotArea" unique_id=1151464697]
+position = Vector2(598, 74.999985)
+scale = Vector2(0.7370002, 0.8249999)
+texture = ExtResource("22_smuir")
+
+[node name="ChiliFull" type="Sprite2D" parent="PotArea" unique_id=1093056651]
+position = Vector2(598.49994, 109.99999)
+scale = Vector2(0.71000004, 0.96800005)
+texture = ExtResource("23_r4juj")
+
+[node name="LettuceEmpty" type="Sprite2D" parent="PotArea" unique_id=1378965880]
+visible = false
+position = Vector2(618.5, 450.50003)
+scale = Vector2(0.54378814, 0.48622048)
+texture = ExtResource("26_vgf5r")
+
+[node name="LettuceFull" type="Sprite2D" parent="PotArea" unique_id=58402784]
+position = Vector2(618.5, 447.49997)
+scale = Vector2(0.5560082, 0.5098425)
+texture = ExtResource("27_ddesb")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1403980668]
 z_index = -10
@@ -424,7 +520,8 @@ zoom = Vector2(0.28, 0.28)
 [connection signal="pressed" from="GameManager/GarlicButton" to="GameManager" method="_on_garlic_button_pressed"]
 [connection signal="pressed" from="GameManager/OnionButton" to="GameManager" method="_on_onion_button_pressed"]
 [connection signal="pressed" from="GameManager/PotatoButton" to="GameManager" method="_on_potato_button_pressed"]
-[connection signal="pressed" from="GameManager/MatchaButton" to="GameManager" method="_on_matcha_button_pressed"]
+[connection signal="pressed" from="GameManager/ChiliButton" to="GameManager" method="_on_chili_button_pressed"]
+[connection signal="pressed" from="GameManager/LettuceButton" to="GameManager" method="_on_lettuce_button_pressed"]
 [connection signal="pressed" from="GameManager/ServeButton" to="GameManager" method="_on_serve_button_pressed"]
 [connection signal="pressed" from="GameManager/RestartButton" to="GameManager" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="GameManager" method="_on_exit_button_pressed"]

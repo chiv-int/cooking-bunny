@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baemjjtdd84vt"
-path="res://.godot/imported/potato-in-basket.png-a1cdc56cdd9a1b1ccff477594c93760d.ctex"
+uid="uid://bfa4f1lfyhdph"
+path="res://.godot/imported/chili.png-e96e7818f0274ccc82ed112e6ced1cb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/kitchen/potato-in-basket.png"
-dest_files=["res://.godot/imported/potato-in-basket.png-a1cdc56cdd9a1b1ccff477594c93760d.ctex"]
+source_file="res://sprite/chili.png"
+dest_files=["res://.godot/imported/chili.png-e96e7818f0274ccc82ed112e6ced1cb0.ctex"]
 
 [params]
 

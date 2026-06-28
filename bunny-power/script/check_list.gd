@@ -3,7 +3,6 @@ extends Control
 @onready var list_container: VBoxContainer = $VBoxContainer/ScrollContainer/ListContainer
 @onready var book_icon: TextureRect = $"../BookIcon"
 
-
 var list_font = preload("res://sprite/8bitoperator_jve.ttf")
 
 func _ready() -> void:
@@ -34,6 +33,7 @@ func _refresh() -> void:
 	for child in list_container.get_children():
 		child.queue_free()
 
+	# --- Required recipe ingredients ---
 	for ingredient in QuestManager.required_amounts:
 		var have = QuestManager.inventory.get(ingredient, 0)
 		var need = QuestManager.required_amounts[ingredient]
@@ -52,3 +52,22 @@ func _refresh() -> void:
 			row.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))   # red
 
 		list_container.add_child(row)
+
+	# --- Decoys the player has gathered ---
+	var decoys = QuestManager.get_wrong_ingredients()
+	if decoys.size() > 0:
+		var heading = Label.new()
+		heading.text = "\nExtra items:"
+		heading.add_theme_font_override("font", list_font)
+		heading.add_theme_font_size_override("font_size", 16)
+		heading.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0))   # white
+		list_container.add_child(heading)
+
+		for decoy in decoys:
+			var amount = QuestManager.inventory.get(decoy, 0)
+			var d_row = Label.new()
+			d_row.text = "%s: %d" % [decoy, amount]
+			d_row.add_theme_font_override("font", list_font)
+			d_row.add_theme_font_size_override("font_size", 16)
+			d_row.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))   # plain grey
+			list_container.add_child(d_row)

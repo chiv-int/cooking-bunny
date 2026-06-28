@@ -12,6 +12,8 @@ enum QuestState {
 	COMPLETED
 }
 
+var cook_restart_penalty: int = 0
+var has_cooked_before: bool = false
 var came_from_kitchen: bool = false
 var current_state: QuestState = QuestState.NOT_STARTED
 var came_from_house: bool = false
@@ -31,25 +33,17 @@ var inventory: Dictionary = {
 	"butter": 0,
 	"fish_sauce": 0
 }
-
 var required_amounts: Dictionary = {
 	"carrot": 3,
 	"onion": 2,
 	"potato": 2,
 	"garlic": 3,
-	"curry_paste": 1,
-	"coconut_milk": 1,
-	"salt": 1,
-	"brown_sugar": 3
+	"coconut_milk": 1
 }
-
 var shop_stock: Dictionary = {
 	"garlic": 3,
 	"onion": 2,
 	"chili": 3,
-	"butter": 2,
-	"fish_sauce": 1,
-	"salt": 2
 }
 
 func start_quest() -> void:

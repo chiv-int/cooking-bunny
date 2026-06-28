@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpyddx5k7o72b"
-path="res://.godot/imported/basket.png-92924b2be8dc109cb1cb54b6434af1f1.ctex"
+uid="uid://cq7ihba2s4kc4"
+path="res://.godot/imported/basket-no-potato.png-c23aef4f7d106ad970f7a723bc0c944a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/kitchen/basket.png"
-dest_files=["res://.godot/imported/basket.png-92924b2be8dc109cb1cb54b6434af1f1.ctex"]
+source_file="res://tile/kitchen/basket-no-potato.png"
+dest_files=["res://.godot/imported/basket-no-potato.png-c23aef4f7d106ad970f7a723bc0c944a.ctex"]
 
 [params]
 

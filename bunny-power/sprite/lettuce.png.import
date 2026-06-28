@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr7hqvp1rf22a"
-path="res://.godot/imported/carrot-96cf.png-fabe0221fbc9d59eb4d2400f3ae7d175.ctex"
+uid="uid://jq8ndr8w2yn5"
+path="res://.godot/imported/lettuce.png-43cb490412aca0730b209dc257e04390.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/kitchen/carrot-96cf.png"
-dest_files=["res://.godot/imported/carrot-96cf.png-fabe0221fbc9d59eb4d2400f3ae7d175.ctex"]
+source_file="res://sprite/lettuce.png"
+dest_files=["res://.godot/imported/lettuce.png-43cb490412aca0730b209dc257e04390.ctex"]
 
 [params]
 

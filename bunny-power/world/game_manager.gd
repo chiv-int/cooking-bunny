@@ -17,7 +17,22 @@ const BUTTON_PATHS := {
 	"garlic":       "GarlicButton",
 	"onion":        "OnionButton",
 	"potato":       "PotatoButton",
+	"chili":        "ChiliButton",
+	"lettuce":      "LettuceButton",
+
 }
+
+const STATION_PATHS := {
+	"carrot":       ["../PotArea/CarrotFull",  "../PotArea/CarrotEmpty"],
+	"garlic":       ["../PotArea/GarlicFull",  "../PotArea/GarlicEmpty"],
+	"onion":        ["../PotArea/OnionFull",   "../PotArea/OnionEmpty"],
+	"potato":       ["../PotArea/PotatoFull",  "../PotArea/PotatoEmpty"],
+	"curry_paste":  ["../PotArea/CurryPasteFull", "../PotArea/CurryPasteEmpty"],
+	"coconut_milk": ["../PotArea/CoconutMilk", ""],
+	"chili":        ["../PotArea/ChiliFull",   "../PotArea/ChiliEmpty"],
+	"lettuce":      ["../PotArea/LettuceFull", "../PotArea/LettuceEmpty"],
+}
+
 const PANTRY_INFINITE := ["salt", "brown_sugar"]
 const PANTRY_LIMITED  := {"curry_paste": 1}
 
@@ -38,7 +53,7 @@ var overlay_textures  := {}
 var overlay_clicks    := {}
 
 # Trap ingredients — penalise heavily if added
-const TRAP_INGREDIENTS = ["matcha"]
+const TRAP_INGREDIENTS = ["chili", "lettuce"]
 const TRAP_PENALTY     = 5
 
 # Wrong order penalty per ingredient
@@ -68,7 +83,8 @@ const USE_STAR_ICONS := false
 # ─────────────────────────────────────────────
 func _ready() -> void:
 	_setup_availability()
-	_init_shelf_sprites()
+	restart_penalty = QuestManager.cook_restart_penalty
+	has_cooked_before = QuestManager.has_cooked_before
 	_init_shelf_sprites()
 	_init_overlay_textures()
 	_reset_ingredients()
@@ -83,14 +99,6 @@ func _ready() -> void:
 		restart_button.visible = false
 
 func _setup_availability() -> void:
-	# --- TEMP TEST INVENTORY — DELETE BEFORE FINAL SUBMISSION ---
-	QuestManager.inventory["carrot"] = 3
-	QuestManager.inventory["onion"] = 2
-	QuestManager.inventory["potato"] = 2
-	QuestManager.inventory["garlic"] = 3
-	QuestManager.inventory["coconut_milk"] = 1
-	# --- END TEMP TEST INVENTORY ---
-
 	available.clear()
 
 	# Infinite pantry staples
@@ -102,15 +110,18 @@ func _setup_availability() -> void:
 		available[ing] = PANTRY_LIMITED[ing]
 
 	# Gathered ingredients — pull count from QuestManager
-	for ing in ["onion", "garlic", "carrot", "potato", "coconut_milk"]:
+	for ing in ["onion", "garlic", "carrot", "potato", "coconut_milk", "chili", "lettuce"]:
 		available[ing] = QuestManager.inventory.get(ing, 0)
 		
 	var matcha_btn = get_node_or_null("MatchaButton")
 	if matcha_btn:
 		matcha_btn.visible = false
-
+	
 	_refresh_buttons()
-
+	for ing in STATION_PATHS:
+		_update_station(ing)
+	
+		
 func _refresh_buttons() -> void:
 	for ing in BUTTON_PATHS:
 		var btn = get_node_or_null(BUTTON_PATHS[ing])
@@ -118,6 +129,23 @@ func _refresh_buttons() -> void:
 			btn.visible = available.get(ing, 0) > 0
 		else:
 			print("WARNING: button not found for ", ing, " at ", BUTTON_PATHS[ing])
+
+func _update_station(ingredient_name: String) -> void:
+	if ingredient_name not in STATION_PATHS:
+		return
+	var full_path  = STATION_PATHS[ingredient_name][0]
+	var empty_path = STATION_PATHS[ingredient_name][1]
+	var count = available.get(ingredient_name, 0)
+
+	var full_node = get_node_or_null(full_path)
+	if full_node:
+		full_node.visible = count > 0
+
+	# Only handle empty node if one is defined
+	if empty_path != "":
+		var empty_node = get_node_or_null(empty_path)
+		if empty_node:
+			empty_node.visible = count <= 0
 
 func _init_shelf_sprites() -> void:
 	var paths := {
@@ -129,7 +157,8 @@ func _init_shelf_sprites() -> void:
 		"garlic":       "../PotArea/GarlicSprite",
 		"onion":        "../PotArea/OnionSprite",
 		"potato":       "../PotArea/PotatoeSprite",
-		"matcha":       "../PotArea/MatchaSprite"
+		"chili":        "../PotArea/ChiliSprite",
+		"lettuce":      "../PotArea/LettuceSprite",
 	}
 	for key in paths:
 		var node = get_node_or_null(paths[key])
@@ -234,6 +263,7 @@ func add_ingredient(ingredient_name: String) -> void:
 			var btn = get_node_or_null(BUTTON_PATHS.get(ingredient_name, ""))
 			if btn:
 				btn.visible = false
+	_update_station(ingredient_name)
 	ingredients[ingredient_name] += 1
 	if ingredient_name not in player_order:
 		player_order.append(ingredient_name)
@@ -305,7 +335,7 @@ func _fly_ingredient_to_pot(ingredient_name: String) -> void:
 	flying.z_index         = 10
 	flying.visible         = true
 	flying.modulate.a      = 1.0
-	flying.scale           = Vector2(3.5, 3.5)
+	flying.scale = shelf_node.scale * 3.5
 
 	# If it's a Sprite2D with a multi-image spritesheet,
 	# show only the first frame by enabling Region and cropping to 1 cell
@@ -344,7 +374,7 @@ func _fly_ingredient_to_pot(ingredient_name: String) -> void:
 		.set_trans(Tween.TRANS_LINEAR)
 
 	# Shrink into pot
-	tween.parallel().tween_property(flying, "scale", Vector2(0.5, 0.5), 0.5)\
+	tween.parallel().tween_property(flying, "scale", shelf_node.scale * 0.5, 0.5)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 	# Fade out near end
@@ -406,6 +436,7 @@ func _update_steam_intensity() -> void:
 # ─────────────────────────────────────────────
 func _on_serve_button_pressed() -> void:
 	has_cooked_before = true
+	QuestManager.has_cooked_before = true
 	_calculate_curry_quality()
 
 func _calculate_curry_quality() -> void:
@@ -418,12 +449,11 @@ func _calculate_curry_quality() -> void:
 			0: quality_score -= 1
 			_: quality_score -= 1
 
-	# Heavy penalty for trap ingredients
-# Penalty for trap ingredients the player GATHERED (from QuestManager)
-	var gathered_traps = QuestManager.get_wrong_ingredients()
-	for trap in gathered_traps:
-		quality_score -= TRAP_PENALTY
-		print("Gathered trap penalised: ", trap, " | -", TRAP_PENALTY)
+# Penalty for trap ingredients ADDED to the pot
+	for trap in TRAP_INGREDIENTS:
+		if ingredients.get(trap, 0) > 0:
+			quality_score -= TRAP_PENALTY
+			print("Trap added to pot: ", trap, " | Penalty: -", TRAP_PENALTY)
 
 	quality_score = max(0, quality_score)
 	_calculate_star_rating()
@@ -568,12 +598,14 @@ func _on_carrot_button_pressed():       add_ingredient("carrot")
 func _on_garlic_button_pressed():       add_ingredient("garlic")
 func _on_onion_button_pressed():        add_ingredient("onion")
 func _on_potato_button_pressed():       add_ingredient("potato")
-func _on_matcha_button_pressed():       add_ingredient("matcha")
+func _on_chili_button_pressed():   add_ingredient("chili")
+func _on_lettuce_button_pressed(): add_ingredient("lettuce")
 
 func _on_restart_button_pressed() -> void:
 	# Apply -1 star penalty if player has already attempted at least once
 	if has_cooked_before:
 		restart_penalty += 1
+		QuestManager.cook_restart_penalty = restart_penalty
 		print("Restart penalty accumulated: ", restart_penalty, " total")
 		# Show penalty warning briefly
 		var star_label: Label = get_node_or_null("PanelContainer2/StarLabel")
@@ -587,6 +619,7 @@ func _on_restart_button_pressed() -> void:
 				star_label.get_parent().visible = false
 			)
 	has_cooked_before = true
+	QuestManager.has_cooked_before = true
 
 	_reset_ingredients()
 	_generate_requests()
