@@ -97,7 +97,8 @@ func _ready() -> void:
 		feedback_panel.visible = false
 	if restart_button:
 		restart_button.visible = false
-
+		
+	
 func _setup_availability() -> void:
 	available.clear()
 
@@ -121,7 +122,23 @@ func _setup_availability() -> void:
 	for ing in STATION_PATHS:
 		_update_station(ing)
 	
-		
+	
+# Factory: creates the correct Ingredient subclass (POLYMORPHISM in action)
+func _make_ingredient(name: String) -> Ingredient:
+	if name in TRAP_INGREDIENTS:
+		return TrapIngredient.new(name)
+	else:
+		return RecipeIngredient.new(name)
+
+# Calculates trap penalty using OOP objects (POLYMORPHISM)
+func _oop_trap_penalty() -> int:
+	var penalty := 0
+	for trap in TRAP_INGREDIENTS:
+		if ingredients.get(trap, 0) > 0:
+			var ing: Ingredient = _make_ingredient(trap)
+			penalty += ing.get_score_effect()   # TrapIngredient returns -5
+	return penalty
+
 func _refresh_buttons() -> void:
 	for ing in BUTTON_PATHS:
 		var btn = get_node_or_null(BUTTON_PATHS[ing])
@@ -451,10 +468,7 @@ func _calculate_curry_quality() -> void:
 			_: quality_score -= 1
 
 # Penalty for trap ingredients ADDED to the pot
-	for trap in TRAP_INGREDIENTS:
-		if ingredients.get(trap, 0) > 0:
-			quality_score -= TRAP_PENALTY
-			print("Trap added to pot: ", trap, " | Penalty: -", TRAP_PENALTY)
+	quality_score += _oop_trap_penalty()
 
 	quality_score = max(0, quality_score)
 	_calculate_star_rating()
