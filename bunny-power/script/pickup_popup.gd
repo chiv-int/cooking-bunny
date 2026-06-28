@@ -13,11 +13,20 @@ var drift: float = 20.0
 func setup(texture: Texture2D, amount: int) -> void:
 	if texture:
 		ingredient_sprite.texture = texture
-		# assume each frame is square (height = frame size)
 		var frame_size = texture.get_height()
-		var frame_count = texture.get_width() / frame_size
+		var frame_count = 1
+		if frame_size > 0:
+			frame_count = max(1, int(texture.get_width() / frame_size))
 		ingredient_sprite.hframes = frame_count
 		ingredient_sprite.frame = 0
+
+		# Scale so one frame displays at 64x64
+		var target_size := 32.0
+		var frame_w: float = float(texture.get_width()) / float(frame_count)
+		var frame_h: float = float(texture.get_height())
+		if frame_w > 0 and frame_h > 0:
+			var scale_factor = target_size / max(frame_w, frame_h)
+			ingredient_sprite.scale = Vector2(scale_factor, scale_factor)
 	amount_label.text = "x%d" % amount
 
 func _ready() -> void:

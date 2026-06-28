@@ -12,6 +12,8 @@ var ingredient_textures: Dictionary = {
 	"potato": preload("res://sprite/potato.png"),
 	"salt": preload("res://sprite/salt.png"),
 	"brown_sugar": preload("res://sprite/suger.png"),
+	"chili": preload("res://sprite/chili.png"),
+	"lettuce": preload("res://sprite/lettuce.png"),
 }
 
 var player_node: Node2D = null
@@ -37,7 +39,7 @@ func _on_ingredient_collected(ingredient_name: String, _amount: int) -> void:
 func _spawn_popup(ingredient_name: String) -> void:
 	var popup = PickupPopupScene.instantiate()
 
-	popup.global_position = player_node.global_position + Vector2(0, -30 - stack_offset)
+	popup.global_position = player_node.global_position + Vector2(0, -50 - stack_offset)
 	stack_offset += 25.0
 	get_tree().create_timer(0.4).timeout.connect(func(): stack_offset = 0.0)
 

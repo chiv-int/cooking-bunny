@@ -29,9 +29,6 @@ var inventory: Dictionary = {
 	"salt": 0,
 	"brown_sugar": 0,
 	"chili": 0,
-	"extra_sugar": 0,
-	"butter": 0,
-	"fish_sauce": 0
 }
 var required_amounts: Dictionary = {
 	"carrot": 3,
@@ -45,7 +42,16 @@ var shop_stock: Dictionary = {
 	"onion": 2,
 	"chili": 3,
 }
+var shop_stock_default: Dictionary = {
+	"garlic": 3,
+	"onion": 2,
+	"chili": 3
+}
 
+func restock_shop() -> void:
+	shop_stock = shop_stock_default.duplicate()
+	print("Shop restocked")
+	
 func start_quest() -> void:
 	if current_state != QuestState.NOT_STARTED:
 		print("Quest already started, blocked")

@@ -437,6 +437,7 @@ func _update_steam_intensity() -> void:
 func _on_serve_button_pressed() -> void:
 	has_cooked_before = true
 	QuestManager.has_cooked_before = true
+	QuestManager.restock_shop()
 	_calculate_curry_quality()
 
 func _calculate_curry_quality() -> void:
