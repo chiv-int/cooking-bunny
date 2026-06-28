@@ -460,6 +460,7 @@ func _calculate_curry_quality() -> void:
 	_calculate_star_rating()
 	_reveal_stars_animated()
 	_show_order_feedback()
+	_show_result_bowl()
 	var star_label: Label = get_node_or_null("PanelContainer2/StarLabel")
 	if star_label:
 		var t := create_tween()
@@ -475,17 +476,22 @@ func _show_order_feedback() -> void:
 		print("WARNING: FeedbackPanel or FeedbackLabel not found")
 		return
 
-	var text := " Correct Order vs Your Order\n"
-	text += "─────────────────────\n"
+	var text := "Result:\n"
 	for i in range(CORRECT_ORDER.size()):
-		var correct : String = CORRECT_ORDER[i]
-		var player  : String = player_order[i] if i < player_order.size() else "missing"
-		var icon    := "✅" if correct == player else "❌"
-		text += "%s %d. Should be: %-12s | You did: %s\n" % [icon, i+1, correct, player]
+		var correct_ing : String = CORRECT_ORDER[i]
+		var player_ing  : String = player_order[i] if i < player_order.size() else ""
+		var mark : String = ""
+		if player_ing == correct_ing:
+			mark = "✓ correct"
+		else:
+			mark = "✗ wrong"
+		text += "%s  %s\n" % [correct_ing, mark]
 
+	# Note if a trap was used
 	for trap in TRAP_INGREDIENTS:
 		if ingredients.get(trap, 0) > 0:
-			text += "\n⚠️ You added %s! That ruined the dish! -%d pts" % [trap, TRAP_PENALTY]
+			text += "\n%s ruined it!" % trap
+			break
 
 	feedback_label.text = text
 
@@ -587,6 +593,39 @@ func _shake_label(label: Label) -> void:
 	tween.tween_property(label, "position", origin + Vector2(4, 0),  0.05)
 	tween.tween_property(label, "position", origin + Vector2(-4, 0), 0.05)
 	tween.tween_property(label, "position", origin,                  0.05)
+	
+	
+func _show_result_bowl() -> void:
+	var best = get_node_or_null("../PotArea/BowlBest")
+	var good = get_node_or_null("../PotArea/BowlGood")
+	var bad  = get_node_or_null("../PotArea/BowlBad")
+
+	# Hide all first
+	if best: best.visible = false
+	if good: good.visible = false
+	if bad:  bad.visible = false
+
+	# Pick the one matching the star tier
+	var bowl: Node2D = null
+	if stars >= 5:
+		bowl = best
+	elif stars >= 3:
+		bowl = good
+	else:
+		bowl = bad
+
+	if not bowl:
+		return
+
+	# Show it with a pop animation
+	bowl.visible = true
+	var target_scale: Vector2 = bowl.scale   # remember its placed scale
+	bowl.scale = Vector2.ZERO                 # start tiny
+	var tween := create_tween()
+	tween.tween_property(bowl, "scale", target_scale * 1.2, 0.18)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(bowl, "scale", target_scale, 0.12)\
+		.set_trans(Tween.TRANS_SINE)
 
 # ─────────────────────────────────────────────
 #  BUTTON HANDLERS
@@ -603,6 +642,7 @@ func _on_chili_button_pressed():   add_ingredient("chili")
 func _on_lettuce_button_pressed(): add_ingredient("lettuce")
 
 func _on_restart_button_pressed() -> void:
+	
 	# Apply -1 star penalty if player has already attempted at least once
 	if has_cooked_before:
 		restart_penalty += 1
@@ -621,7 +661,14 @@ func _on_restart_button_pressed() -> void:
 			)
 	has_cooked_before = true
 	QuestManager.has_cooked_before = true
-
+	
+	var best = get_node_or_null("../BowlBest")
+	var good = get_node_or_null("../BowlGood")
+	var bad  = get_node_or_null("../BowlBad")
+	if best: best.visible = false
+	if good: good.visible = false
+	if bad:  bad.visible = false
+	
 	_reset_ingredients()
 	_generate_requests()
 	_show_requests()

@@ -1,10 +1,18 @@
 extends Node
 
+var music_player: AudioStreamPlayer
+const GAME_MUSIC = preload("res://fx/lofi.ogg")  # adjust to your filename
 var sfx_player: AudioStreamPlayer
 
 func _ready() -> void:
 	sfx_player = AudioStreamPlayer.new()
 	add_child(sfx_player)
+
+	music_player = AudioStreamPlayer.new()
+	add_child(music_player)
+	music_player.stream = GAME_MUSIC
+	music_player.volume_db = -10.0   # quieter than SFX so it doesn't overpower
+	music_player.play()
 
 func play_sound(stream: AudioStream) -> void:
 	sfx_player.stream = stream

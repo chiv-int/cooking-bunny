@@ -40,7 +40,9 @@ y_sort_enabled = true
 position = Vector2(202, 1729)
 
 [node name="npc" parent="." unique_id=1509032494 instance=ExtResource("5_6psia")]
-position = Vector2(260, 168)
+z_index = 1
+y_sort_enabled = true
+position = Vector2(2404, 1727)
 
 [node name="CheckListUI" parent="." unique_id=914637263 instance=ExtResource("5_c8hlg")]
 
